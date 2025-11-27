@@ -16,12 +16,11 @@ export const updateSpotifyAccountError = async (
 	});
 };
 
-export const isSpotifyReconnectError = (errorMessage: string): boolean => {
-	const reconnectErrors = [
+export function isSpotifyReconnectError(errorMessage: string): boolean {
+	const reconnectErrors: string[] = [
 		SPOTIFY_ERRORS.REVOKED,
 		SPOTIFY_ERRORS.EXPIRED,
 		SPOTIFY_ERRORS.NO_TOKEN,
-		SPOTIFY_ERRORS.RECONNECT_NEEDED,
-	] as string[];
+	];
 	return reconnectErrors.includes(errorMessage);
-};
+}
