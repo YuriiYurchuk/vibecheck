@@ -8,15 +8,21 @@ datasource db {
 }
 
 model User {
-  id                    String @id @default(cuid())
-  email                 String @unique
-  name                  String?
-  image                 String?
-  emailVerified         Boolean @default(false)
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime  @updatedAt
-  sessions              Session[]
-  accounts              Account[]
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  emailVerified Boolean   @default(false)
+  lastSyncedAt  DateTime?
+  isSyncing     Boolean   @default(false)
+  lastActiveAt  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  playHistory   PlayHistory[] 
+
+  @@map("users")
 }
 
 model Session {
@@ -31,6 +37,7 @@ model Session {
   updatedAt             DateTime @updatedAt
 
   @@index([userId])
+  @@map("sessions")
 }
 
 model Account {
@@ -53,10 +60,11 @@ model Account {
 
   @@unique([providerId, accountId])
   @@index([userId])
+  @@map("accounts")
 }
 
 model Verification {
-  id                    String   @id @default(cuid())
+  id                    String @id @default(cuid())
   identifier            String
   value                 String
   expiresAt             DateTime
@@ -64,4 +72,69 @@ model Verification {
   updatedAt             DateTime @updatedAt
   
   @@unique([identifier, value])
+  @@map("verifications")
+}
+
+model Artist {
+  id                    String @id
+  name                  String
+  imageUrl              String?
+  href                  String?
+  tracks                TrackArtist[]
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([name])
+  @@map("artists")
+}
+
+model Track {
+  id                    String @id
+  name                  String
+  imageUrl              String?
+  durationMs            Int
+  href                  String?
+  acousticness          Float?
+  danceability          Float?
+  energy                Float?
+  instrumentalness      Float?
+  key                   Int?
+  liveness              Float?
+  loudness              Float?
+  mode                  Int?
+  speechiness           Float?
+  tempo                 Float?
+  valence               Float?
+  artists               TrackArtist[]
+  plays                 PlayHistory[]
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([name])
+  @@map("tracks")
+}
+
+model TrackArtist {
+  trackId               String
+  artistId              String
+  track                 Track  @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  artist                Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([trackId, artistId])
+  @@index([artistId])
+  @@map("track_artists")
+}
+
+model PlayHistory {
+  id                    String @id @default(cuid())
+  userId                String
+  trackId               String
+  playedAt              DateTime
+  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  track                 Track @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  createdAt             DateTime @default(now())
+
+  @@unique([userId, trackId, playedAt])
+  @@index([userId, playedAt, trackId])
+  @@map("play_history")
 }
