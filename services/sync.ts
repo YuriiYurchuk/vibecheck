@@ -11,8 +11,7 @@ import type { ArtistBasicInfo } from '@/types/spotify';
 import type { SyncResult, SyncStats } from '@/types/sync';
 
 export const syncSpotifyHistory = async (
-	userId: string,
-	after?: string
+	userId: string
 ): Promise<SyncResult> => {
 	const stats: SyncStats = {
 		tracksProcessed: 0,
@@ -23,17 +22,26 @@ export const syncSpotifyHistory = async (
 	};
 
 	try {
+		const user = await prisma.user.findUnique({
+			where: { id: userId },
+			select: { lastSyncedAt: true },
+		});
+
 		await prisma.user.update({
 			where: { id: userId },
 			data: { isSyncing: true },
 		});
+
+		const after = user?.lastSyncedAt
+			? user.lastSyncedAt.getTime().toString()
+			: undefined;
 
 		const recent = await fetchRecentTracks(userId, after);
 
 		if (!recent.items.length) {
 			await prisma.user.update({
 				where: { id: userId },
-				data: { isSyncing: false, lastSyncedAt: new Date() },
+				data: { isSyncing: false },
 			});
 			return { success: true, stats };
 		}
@@ -96,11 +104,13 @@ export const syncSpotifyHistory = async (
 
 		stats.playHistoryCreated = await createPlayHistory(userId, recent.items);
 
+		const latestTrackTime = new Date(recent.items[0].played_at);
+
 		await prisma.user.update({
 			where: { id: userId },
 			data: {
 				isSyncing: false,
-				lastSyncedAt: new Date(),
+				lastSyncedAt: latestTrackTime,
 			},
 		});
 
