@@ -13,6 +13,7 @@ export const auth = betterAuth({
 			clientId: process.env.SPOTIFY_CLIENT_ID as string,
 			clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
 			scope: ['user-read-recently-played'],
+			overrideUserInfoOnSignIn: true,
 			mapProfileToUser: (profile) => {
 				return {
 					id: profile.id,
