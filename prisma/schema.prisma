@@ -13,11 +13,11 @@ model User {
   name          String?
   image         String?
   emailVerified Boolean   @default(false)
-  lastSyncedAt  DateTime?
+  lastSyncedAt  DateTime? @db.Timestamptz
   isSyncing     Boolean   @default(false)
-  lastActiveAt  DateTime  @default(now())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  lastActiveAt  DateTime  @default(now()) @db.Timestamptz
+  createdAt     DateTime  @default(now()) @db.Timestamptz
+  updatedAt     DateTime  @updatedAt @db.Timestamptz
   sessions      Session[]
   accounts      Account[]
   playHistory   PlayHistory[] 
@@ -27,14 +27,14 @@ model User {
 
 model Session {
   id                    String @id @default(cuid())
-  expiresAt             DateTime
+  expiresAt             DateTime @db.Timestamptz
   token                 String @unique
   userId                String
   ipAddress             String?
   userAgent             String? 
   user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
 
   @@index([userId])
   @@map("sessions")
@@ -48,14 +48,14 @@ model Account {
   accessToken           String?
   refreshToken          String?
   idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
+  accessTokenExpiresAt  DateTime? @db.Timestamptz
+  refreshTokenExpiresAt DateTime? @db.Timestamptz
   scope                 String?
   hasError              Boolean   @default(false)
   lastError             String?
-  lastErrorAt           DateTime?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt 
+  lastErrorAt           DateTime? @db.Timestamptz
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
   user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([providerId, accountId])
@@ -67,9 +67,9 @@ model Verification {
   id                    String @id @default(cuid())
   identifier            String
   value                 String
-  expiresAt             DateTime
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  expiresAt             DateTime @db.Timestamptz
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
   
   @@unique([identifier, value])
   @@map("verifications")
@@ -81,8 +81,8 @@ model Artist {
   imageUrl              String?
   href                  String?
   tracks                TrackArtist[]
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
 
   @@index([name])
   @@map("artists")
@@ -107,8 +107,8 @@ model Track {
   valence               Float?
   artists               TrackArtist[]
   plays                 PlayHistory[]
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
 
   @@index([name])
   @@map("tracks")
@@ -129,10 +129,10 @@ model PlayHistory {
   id                    String @id @default(cuid())
   userId                String
   trackId               String
-  playedAt              DateTime
+  playedAt              DateTime @db.Timestamptz
   user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
   track                 Track @relation(fields: [trackId], references: [id], onDelete: Cascade)
-  createdAt             DateTime @default(now())
+  createdAt             DateTime @default(now()) @db.Timestamptz
 
   @@unique([userId, trackId, playedAt])
   @@index([userId, playedAt, trackId])

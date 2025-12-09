@@ -104,13 +104,11 @@ export const syncSpotifyHistory = async (
 
 		stats.playHistoryCreated = await createPlayHistory(userId, recent.items);
 
-		const latestTrackTime = new Date(recent.items[0].played_at);
-
 		await prisma.user.update({
 			where: { id: userId },
 			data: {
 				isSyncing: false,
-				lastSyncedAt: latestTrackTime,
+				lastSyncedAt: recent.items[0].played_at,
 			},
 		});
 

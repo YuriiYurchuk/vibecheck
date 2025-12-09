@@ -49,14 +49,6 @@ export const createArtists = async (artists: ArtistInput[]) => {
 export const createTracks = async (tracks: TrackInput[]) => {
 	if (tracks.length === 0) return 0;
 
-	if (tracks[0]) {
-		console.log('🔍 [DB DEBUG] First track payload:', {
-			name: tracks[0].name,
-			energy: tracks[0].energy,
-			tempo: tracks[0].tempo,
-		});
-	}
-
 	const tracksToCreate: Prisma.TrackCreateManyInput[] = tracks.map((t) => ({
 		id: t.id,
 		name: t.name,
@@ -107,11 +99,13 @@ export const createPlayHistory = async (
 ) => {
 	if (items.length === 0) return 0;
 
-	const historyEntries = items.map((item) => ({
-		userId,
-		trackId: item.track.id,
-		playedAt: new Date(item.played_at),
-	}));
+	const historyEntries = items.map((item) => {
+		return {
+			userId,
+			trackId: item.track.id,
+			playedAt: item.played_at,
+		};
+	});
 
 	const { count } = await prisma.playHistory.createMany({
 		data: historyEntries,
