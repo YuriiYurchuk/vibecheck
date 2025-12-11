@@ -13,6 +13,7 @@ model User {
   name          String?
   image         String?
   emailVerified Boolean   @default(false)
+  timezone      String    @default("UTC")
   lastSyncedAt  DateTime? @db.Timestamptz
   isSyncing     Boolean   @default(false)
   lastActiveAt  DateTime  @default(now()) @db.Timestamptz
