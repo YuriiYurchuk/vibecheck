@@ -1,6 +1,6 @@
 import { requireSession } from '@/lib/auth/session';
 import { prisma } from '@/lib/db';
-import { syncSpotifyHistory } from '@/services/sync';
+import { syncSpotifyHistory } from '@/lib/services';
 
 export const POST = async () => {
 	try {
