@@ -1,3 +1,4 @@
+export { getCalendar, getTodayHourlyActivity } from './listening';
 export {
 	getDailyActivity,
 	getSummaryStats,
