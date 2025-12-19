@@ -1,25 +1,25 @@
+import { getTodayInUserTz } from './date';
+
 export const getDateSince = (period: string, timezone: string): Date => {
-	const nowInUserTz = new Date(
-		new Date().toLocaleString('en-US', { timeZone: timezone })
-	);
+	const now = new Date();
 
 	switch (period) {
 		case 'week': {
-			const weekAgo = new Date(nowInUserTz);
-			weekAgo.setDate(weekAgo.getDate() - 7);
-			weekAgo.setHours(0, 0, 0, 0);
-			return weekAgo;
+			const todayStr = getTodayInUserTz(timezone);
+			const targetDate = new Date(todayStr);
+			targetDate.setDate(targetDate.getDate() - 7);
+			return targetDate;
 		}
 		case 'month': {
-			const monthAgo = new Date(nowInUserTz);
-			monthAgo.setDate(monthAgo.getDate() - 30);
-			monthAgo.setHours(0, 0, 0, 0);
-			return monthAgo;
+			const todayStr = getTodayInUserTz(timezone);
+			const targetDate = new Date(todayStr);
+			targetDate.setDate(targetDate.getDate() - 30);
+			return targetDate;
 		}
 		default: {
-			const startOfDay = new Date(nowInUserTz);
-			startOfDay.setHours(0, 0, 0, 0);
-			return startOfDay;
+			const last24Hours = new Date(now);
+			last24Hours.setHours(last24Hours.getHours() - 24);
+			return last24Hours;
 		}
 	}
 };

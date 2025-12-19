@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/db';
+import { getTodayInUserTz } from '@/lib/helpers';
 
 export const getSummaryStats = async (userId: string, since: Date) => {
 	const [basicStats, uniqueArtistsResult] = await Promise.all([
@@ -142,7 +143,7 @@ export const getDailyActivity = async (
 	>`
     WITH user_plays AS (
       SELECT
-        ("playedAt" AT TIME ZONE 'UTC' AT TIME ZONE ${timezone})::date as local_date
+        ("playedAt" AT TIME ZONE ${timezone})::date as local_date
       FROM play_history
       WHERE "userId" = ${userId}
         AND "playedAt" >= ${since}
@@ -156,9 +157,9 @@ export const getDailyActivity = async (
   `;
 
 	const days: Array<{ date: string; plays: number }> = [];
-	const nowInUserTz = new Date(
-		new Date().toLocaleString('en-US', { timeZone: timezone })
-	);
+
+	const todayStr = getTodayInUserTz(timezone);
+	const nowInUserTz = new Date(todayStr);
 
 	for (let i = 6; i >= 0; i--) {
 		const date = new Date(nowInUserTz);
