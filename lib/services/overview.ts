@@ -1,5 +1,6 @@
+import { format, startOfDay, subDays } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 import { prisma } from '@/lib/db';
-import { getTodayInUserTz } from '@/lib/helpers';
 
 export const getSummaryStats = async (userId: string, since: Date) => {
 	const [basicStats, uniqueArtistsResult] = await Promise.all([
@@ -141,36 +142,28 @@ export const getDailyActivity = async (
 			count: bigint;
 		}>
 	>`
-    WITH user_plays AS (
-      SELECT
-        ("playedAt" AT TIME ZONE ${timezone})::date as local_date
-      FROM play_history
-      WHERE "userId" = ${userId}
-        AND "playedAt" >= ${since}
-    )
     SELECT 
-      TO_CHAR(local_date, 'YYYY-MM-DD') as date,
+      TO_CHAR("playedAt" AT TIME ZONE ${timezone}, 'YYYY-MM-DD') as date,
       COUNT(*)::int as count
-    FROM user_plays
-    GROUP BY local_date
-    ORDER BY local_date ASC
+    FROM play_history
+    WHERE "userId" = ${userId}
+      AND "playedAt" >= ${since}
+    GROUP BY date
+    ORDER BY date ASC
   `;
 
+	const resultMap = new Map(result.map((r) => [r.date, Number(r.count)]));
 	const days: Array<{ date: string; plays: number }> = [];
-
-	const todayStr = getTodayInUserTz(timezone);
-	const nowInUserTz = new Date(todayStr);
+	const nowInTZ = toZonedTime(new Date(), timezone);
+	const todayStartInTZ = startOfDay(nowInTZ);
 
 	for (let i = 6; i >= 0; i--) {
-		const date = new Date(nowInUserTz);
-		date.setDate(date.getDate() - i);
-		const dateStr = date.toISOString().split('T')[0];
-
-		const found = result.find((r) => r.date === dateStr);
+		const dayInTZ = subDays(todayStartInTZ, i);
+		const dateStr = format(dayInTZ, 'yyyy-MM-dd');
 
 		days.push({
 			date: dateStr,
-			plays: found ? Number(found.count) : 0,
+			plays: resultMap.get(dateStr) || 0,
 		});
 	}
 

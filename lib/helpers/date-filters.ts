@@ -1,25 +1,21 @@
-import { getTodayInUserTz } from './date';
+import { startOfDay, subDays } from 'date-fns';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 
 export const getDateSince = (period: string, timezone: string): Date => {
-	const now = new Date();
+	const nowInTZ = toZonedTime(new Date(), timezone);
+	const todayStartInTZ = startOfDay(nowInTZ);
 
 	switch (period) {
 		case 'week': {
-			const todayStr = getTodayInUserTz(timezone);
-			const targetDate = new Date(todayStr);
-			targetDate.setDate(targetDate.getDate() - 7);
-			return targetDate;
+			const weekAgoInTZ = subDays(todayStartInTZ, 7);
+			return fromZonedTime(weekAgoInTZ, timezone);
 		}
 		case 'month': {
-			const todayStr = getTodayInUserTz(timezone);
-			const targetDate = new Date(todayStr);
-			targetDate.setDate(targetDate.getDate() - 30);
-			return targetDate;
+			const monthAgoInTZ = subDays(todayStartInTZ, 30);
+			return fromZonedTime(monthAgoInTZ, timezone);
 		}
 		default: {
-			const last24Hours = new Date(now);
-			last24Hours.setHours(last24Hours.getHours() - 24);
-			return last24Hours;
+			return fromZonedTime(todayStartInTZ, timezone);
 		}
 	}
 };
