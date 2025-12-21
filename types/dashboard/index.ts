@@ -1,4 +1,4 @@
-export interface DashboardOverviewResponse {
+export type DashboardOverviewResponse = {
 	summary: {
 		totalPlays: number;
 		uniqueTracks: number;
@@ -22,4 +22,15 @@ export interface DashboardOverviewResponse {
 		date: string;
 		plays: number;
 	}>;
-}
+};
+
+export type DashboardListeningResponse = {
+	hourlyActivity: Array<{
+		hour: number;
+		count: number;
+	}>;
+	yearCalendar: Array<{
+		date: string;
+		count: number;
+	}>;
+};
