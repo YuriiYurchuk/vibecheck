@@ -1,5 +1,12 @@
 export { getCalendar, getTodayHourlyActivity } from './listening';
 export {
+	getAverageAudioFeatures,
+	getKeyDistribution,
+	getModeDistribution,
+	getTempoDistribution,
+	getValenceEnergyScatter,
+} from './mood';
+export {
 	getDailyActivity,
 	getSummaryStats,
 	getTopArtists,
