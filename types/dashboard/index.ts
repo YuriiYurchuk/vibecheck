@@ -34,3 +34,38 @@ export type DashboardListeningResponse = {
 		count: number;
 	}>;
 };
+
+export type DashboardMoodResponse = {
+	averageFeatures: {
+		acousticness: number | null;
+		danceability: number | null;
+		energy: number | null;
+		instrumentalness: number | null;
+		liveness: number | null;
+		loudness: number | null;
+		speechiness: number | null;
+		tempo: number | null;
+		valence: number | null;
+		tracksWithFeatures: number;
+		totalTracks: number;
+	};
+	keyDistribution: Array<{
+		key: string;
+		count: number;
+	}>;
+	modeDistribution: {
+		major: number;
+		minor: number;
+	};
+	scatterData: Array<{
+		trackId: string;
+		trackName: string;
+		valence: number;
+		energy: number;
+		playCount: number;
+	}>;
+	tempoDistribution: Array<{
+		range: string;
+		count: number;
+	}>;
+};
