@@ -12,4 +12,5 @@ export {
 	getTopArtists,
 	getTopTracks,
 } from './overview';
+export { getRecentTracks } from './recent';
 export { syncSpotifyHistory } from './sync';
