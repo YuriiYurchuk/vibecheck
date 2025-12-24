@@ -69,3 +69,22 @@ export type DashboardMoodResponse = {
 		count: number;
 	}>;
 };
+
+export type DashboardRecentResponse = {
+	tracks: Array<{
+		id: string;
+		playedAt: string;
+		track: {
+			id: string;
+			name: string;
+			imageUrl: string | null;
+			durationMs: number;
+			artists: Array<{
+				id: string;
+				name: string;
+			}>;
+		};
+	}>;
+	total: number;
+	hasMore: boolean;
+};
