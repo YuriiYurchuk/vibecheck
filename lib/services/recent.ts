@@ -69,10 +69,12 @@ export const getRecentTracks = async (
 				id: ph.track.id,
 				name: ph.track.name,
 				imageUrl: ph.track.imageUrl,
+				href: ph.track.href,
 				durationMs: ph.track.durationMs,
 				artists: ph.track.artists.map((ta) => ({
 					id: ta.artist.id,
 					name: ta.artist.name,
+					href: ta.artist.href,
 				})),
 			},
 		})),

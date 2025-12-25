@@ -9,13 +9,15 @@ export type DashboardOverviewResponse = {
 		id: string;
 		name: string;
 		imageUrl: string | null;
-		artists: Array<{ id: string; name: string }>;
+		href: string | null;
+		artists: Array<{ id: string; name: string; href: string | null }>;
 		playCount: number;
 	}>;
 	topArtists: Array<{
 		id: string;
 		name: string;
 		imageUrl: string | null;
+		href: string | null;
 		playCount: number;
 	}>;
 	weeklyActivity: Array<{
@@ -78,10 +80,12 @@ export type DashboardRecentResponse = {
 			id: string;
 			name: string;
 			imageUrl: string | null;
+			href: string | null;
 			durationMs: number;
 			artists: Array<{
 				id: string;
 				name: string;
+				href: string | null;
 			}>;
 		};
 	}>;

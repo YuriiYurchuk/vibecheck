@@ -56,6 +56,7 @@ export const getTopTracks = async (
 			id: string;
 			name: string;
 			imageUrl: string | null;
+			href: string | null;
 			play_count: bigint;
 			artists: unknown;
 		}>
@@ -73,15 +74,16 @@ export const getTopTracks = async (
       t.id,
       t.name,
       t."imageUrl",
+			t."href",
       tp.play_count,
       JSON_AGG(
-        JSON_BUILD_OBJECT('id', a.id, 'name', a.name)
+        JSON_BUILD_OBJECT('id', a.id, 'name', a.name, 'href', a."href")
       ) as artists
     FROM track_plays tp
     JOIN tracks t ON tp."trackId" = t.id
     LEFT JOIN track_artists ta ON t.id = ta."trackId"
     LEFT JOIN artists a ON ta."artistId" = a.id
-    GROUP BY t.id, t.name, t."imageUrl", tp.play_count
+    GROUP BY t.id, t.name, t."imageUrl", t."href", tp.play_count
     ORDER BY tp.play_count DESC
     LIMIT ${limit}
   `;
@@ -90,7 +92,10 @@ export const getTopTracks = async (
 		id: r.id,
 		name: r.name,
 		imageUrl: r.imageUrl,
-		artists: (r.artists as Array<{ id: string; name: string }>) || [],
+		href: r.href,
+		artists:
+			(r.artists as Array<{ id: string; name: string; href: string | null }>) ||
+			[],
 		playCount: Number(r.play_count),
 	}));
 };
@@ -105,6 +110,7 @@ export const getTopArtists = async (
 			id: string;
 			name: string;
 			imageUrl: string | null;
+			href: string | null;
 			play_count: bigint;
 		}>
 	>`
@@ -112,13 +118,14 @@ export const getTopArtists = async (
       a.id,
       a.name,
       a."imageUrl",
+			a."href",
       COUNT(*) as play_count
     FROM play_history ph
     JOIN track_artists ta ON ph."trackId" = ta."trackId"
     JOIN artists a ON ta."artistId" = a.id
     WHERE ph."userId" = ${userId}
       AND ph."playedAt" >= ${since}
-    GROUP BY a.id, a.name, a."imageUrl"
+    GROUP BY a.id, a.name, a."imageUrl", a.href
     ORDER BY play_count DESC
     LIMIT ${limit}
   `;
@@ -127,6 +134,7 @@ export const getTopArtists = async (
 		id: r.id,
 		name: r.name,
 		imageUrl: r.imageUrl,
+		href: r.href,
 		playCount: Number(r.play_count),
 	}));
 };
