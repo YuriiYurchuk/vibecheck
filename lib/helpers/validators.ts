@@ -8,3 +8,8 @@ export const validateLimit = (limit: string | null): number => {
 	const allowed = [10, 25, 50];
 	return allowed.includes(parsed) ? parsed : 10;
 };
+
+export const validateOffset = (offset: string | null): number => {
+	const parsed = Number.parseInt(offset || '0', 10);
+	return parsed >= 0 ? parsed : 0;
+};
