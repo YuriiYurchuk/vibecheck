@@ -1,3 +1,11 @@
+export {
+	compare30DayPeriods,
+	getLongestStreak,
+	getMostActiveDay,
+	getMusicalMood,
+	getPeakListeningHour,
+	getTotalHours,
+} from './insights';
 export { getCalendar, getTodayHourlyActivity } from './listening';
 export {
 	getAverageAudioFeatures,
