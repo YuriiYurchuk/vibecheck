@@ -20,7 +20,7 @@ export const GET = async (request: Request) => {
 		}
 		console.error('Failed to fetch recent tracks:', err);
 		return NextResponse.json(
-			{ error: 'Failed to fetch recent tracks' },
+			{ error: 'Failed to fetch dashboard data' },
 			{ status: 500 }
 		);
 	}

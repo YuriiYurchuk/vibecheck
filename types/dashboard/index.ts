@@ -92,3 +92,38 @@ export type DashboardRecentResponse = {
 	total: number;
 	hasMore: boolean;
 };
+
+export type DashboardInsightsResponse = {
+	period: string;
+	totalHours: {
+		hours: number;
+		minutes: number;
+	};
+	mostActiveDay: {
+		day: string;
+		dayIndex: number;
+		count: number;
+	};
+	peakHour: {
+		hour: number;
+		range: string;
+		count: number;
+	};
+	musicalMood: {
+		mood: string;
+		moodEmoji: string;
+		energy: number;
+		valence: number;
+	};
+	streak: {
+		longestStreak: number;
+		currentStreak: number;
+	};
+	comparison: {
+		current: number;
+		previous: number;
+		percentChange: number;
+		isIncrease: boolean;
+		changeText: string;
+	};
+};

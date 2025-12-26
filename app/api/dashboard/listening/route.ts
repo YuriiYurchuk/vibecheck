@@ -37,7 +37,7 @@ export const GET = async (request: Request) => {
 		if (err instanceof Error && err.message === 'Unauthorized') {
 			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 		}
-		console.error('Failed to fetch dashboard data:', err);
+		console.error('Failed to fetch listening data:', err);
 
 		return NextResponse.json(
 			{ error: 'Failed to fetch dashboard data' },
