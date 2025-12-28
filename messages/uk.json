@@ -1,0 +1,41 @@
+{
+	"sidebar": {
+		"routes": {
+			"overview": "Огляд",
+			"listeningHistory": "Історія прослуховувань",
+			"moodAnalysis": "Аналіз настрою",
+			"insights": "Інсайти",
+			"recentPlays": "Останні треки",
+			"settings": "Налаштування"
+		},
+		"userMenu": {
+			"myAccount": "Мій акаунт",
+			"profile": "Профіль",
+			"logout": "Вийти"
+		},
+		"backToHome": "Повернутися на головну",
+		"toggleMenu": "Меню"
+	},
+	"header": {
+		"routes": {
+			"overview": "Огляд",
+			"listeningHistory": "Історія прослуховувань",
+			"moodAnalysis": "Аналіз настрою",
+			"insights": "Інсайти",
+			"recentPlays": "Останні треки",
+			"settings": "Налаштування",
+			"profile": "Профіль"
+		},
+		"changeLanguage": "Змінити мову",
+		"toggleTheme": "Змінити тему",
+		"theme": {
+			"light": "Світла",
+			"dark": "Темна",
+			"system": "Системна"
+		},
+		"languages": {
+			"english": "English",
+			"ukrainian": "Українська"
+		}
+	}
+}
