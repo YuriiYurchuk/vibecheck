@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
+import { QueryProvider } from '@/components/providers/query-provider';
 import { TimezoneSync } from '@/components/providers/timezone-sync';
 import './globals.css';
 
@@ -33,8 +34,10 @@ export default async function RootLayout({
 			<body>
 				<NextIntlClientProvider>
 					<ThemeProvider attribute="class">
-						<TimezoneSync />
-						{children}
+						<QueryProvider>
+							<TimezoneSync />
+							{children}
+						</QueryProvider>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>
