@@ -37,5 +37,21 @@
 			"english": "English",
 			"ukrainian": "Українська"
 		}
+	},
+	"dashboard": {
+		"greeting": {
+			"morning": "Доброго ранку, {name}",
+			"afternoon": "Доброго дня, {name}",
+			"evening": "Доброго вечора, {name}",
+			"default": "З поверненням, {name}"
+		},
+		"subtitle": "Ось що ви слухали останнім часом",
+		"filters": {
+			"day": "День",
+			"week": "Тиждень",
+			"month": "Місяць",
+			"year": "Рік",
+			"top": "Топ {count}"
+		}
 	}
 }

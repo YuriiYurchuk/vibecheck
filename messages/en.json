@@ -37,5 +37,21 @@
 			"english": "English",
 			"ukrainian": "Українська"
 		}
+	},
+	"dashboard": {
+		"greeting": {
+			"morning": "Good morning, {name}",
+			"afternoon": "Good afternoon, {name}",
+			"evening": "Good evening, {name}",
+			"default": "Welcome back, {name}"
+		},
+		"subtitle": "Here's what you've been listening to recently",
+		"filters": {
+			"day": "Day",
+			"week": "Week",
+			"month": "Month",
+			"year": "Year",
+			"top": "Top {count}"
+		}
 	}
 }
