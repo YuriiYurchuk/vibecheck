@@ -11,6 +11,8 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Link } from '@/i18n/navigation';
 
 const routeGradients: Record<string, string> = {
@@ -38,15 +40,20 @@ export const DashboardHeader = () => {
 	const pathname = usePathname();
 	const locale = useLocale();
 	const t = useTranslations('header');
+
 	const routePath = pathname.replace(`/${locale}`, '') || '/dashboard';
 	const routeKey = routeKeys[routePath] || 'overview';
 	const pageTitle = t(`routes.${routeKey}`);
 	const gradient = routeGradients[routePath] || 'from-primary to-accent';
 
 	return (
-		<header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl supports-backdrop-filter:bg-background/80">
-			<div className="flex h-16 items-center justify-between px-4 lg:px-6">
-				<div className="pl-12 lg:pl-0">
+		<header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background/80 px-4 backdrop-blur-xl transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+			<div className="flex items-center gap-2">
+				<SidebarTrigger className="-ml-1" />
+				<Separator orientation="vertical" className="mr-2 h-4" />
+			</div>
+			<div className="flex flex-1 items-center justify-between">
+				<div>
 					<h2
 						className={`text-xl lg:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r ${gradient}`}
 					>
@@ -56,11 +63,7 @@ export const DashboardHeader = () => {
 				<div className="flex items-center gap-1">
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="hover:bg-accent hover:text-accent-foreground transition-colors"
-							>
+							<Button variant="ghost" size="icon">
 								<Globe className="h-5 w-5" />
 								<span className="sr-only">{t('changeLanguage')}</span>
 							</Button>
@@ -90,11 +93,7 @@ export const DashboardHeader = () => {
 					</DropdownMenu>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="hover:bg-accent hover:text-accent-foreground transition-colors"
-							>
+							<Button variant="ghost" size="icon">
 								<Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
 								<Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
 								<span className="sr-only">{t('toggleTheme')}</span>
