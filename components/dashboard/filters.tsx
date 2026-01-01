@@ -30,28 +30,28 @@ type LimitSelectProps = {
 export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 	const t = useTranslations('dashboard.filters');
 	return (
-		<ButtonGroup>
+		<ButtonGroup className="p-1 border border-border/50 rounded-lg">
 			<Button
-				variant={value === 'day' ? 'default' : 'outline'}
+				variant={value === 'day' ? 'default' : 'ghost'}
 				onClick={() => onChange('day')}
 				size="sm"
-				className="px-4"
+				className="cursor-pointer"
 			>
 				{t('day')}
 			</Button>
 			<Button
-				variant={value === 'week' ? 'default' : 'outline'}
+				variant={value === 'week' ? 'default' : 'ghost'}
 				onClick={() => onChange('week')}
 				size="sm"
-				className="px-4"
+				className="cursor-pointer"
 			>
 				{t('week')}
 			</Button>
 			<Button
-				variant={value === 'month' ? 'default' : 'outline'}
+				variant={value === 'month' ? 'default' : 'ghost'}
 				onClick={() => onChange('month')}
 				size="sm"
-				className="px-4"
+				className="cursor-pointer"
 			>
 				{t('month')}
 			</Button>
@@ -100,12 +100,16 @@ export const LimitSelect = ({ value, onChange }: LimitSelectProps) => {
 			value={value.toString()}
 			onValueChange={(v) => onChange(Number(v) as Limit)}
 		>
-			<SelectTrigger className="w-32">
+			<SelectTrigger className="w-32 cursor-pointer">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
 				{limits.map((limit) => (
-					<SelectItem key={limit} value={limit.toString()}>
+					<SelectItem
+						key={limit}
+						value={limit.toString()}
+						className="cursor-pointer"
+					>
 						{t('top', { count: limit })}
 					</SelectItem>
 				))}

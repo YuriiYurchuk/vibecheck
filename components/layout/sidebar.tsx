@@ -2,6 +2,7 @@
 
 import {
 	Activity,
+	ChevronUp,
 	HeartPulse,
 	Home,
 	LayoutDashboard,
@@ -18,10 +19,11 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel, // 👇 Було пропущено
+	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { FadeIn } from '@/components/ui/fade-in';
 import {
 	Sidebar,
 	SidebarContent,
@@ -34,6 +36,7 @@ import {
 	SidebarMenuItem,
 	SidebarRail,
 } from '@/components/ui/sidebar';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Link } from '@/i18n/navigation';
 import { signOut, useSession } from '@/lib/auth/client';
 import { cn } from '@/lib/utils';
@@ -42,7 +45,7 @@ export function AppSidebar() {
 	const t = useTranslations('sidebar');
 	const pathname = usePathname();
 	const locale = useLocale();
-	const { data: session } = useSession();
+	const { data: session, isPending } = useSession();
 
 	const currentPath = pathname.replace(`/${locale}`, '') || '/';
 
@@ -166,60 +169,77 @@ export function AppSidebar() {
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
-					{session?.user && (
+					{isPending ? (
 						<SidebarMenuItem>
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<SidebarMenuButton
-										size="lg"
-										className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-									>
-										<Avatar className="h-8 w-8 rounded-lg">
-											<AvatarImage
-												src={session.user.image || ''}
-												alt={session.user.name || ''}
-											/>
-											<AvatarFallback className="rounded-lg bg-linear-to-r from-primary to-accent text-white">
-												{getUserInitials(session.user.name)}
-											</AvatarFallback>
-										</Avatar>
-										<div className="grid flex-1 text-left text-sm leading-tight">
-											<span className="truncate font-semibold">
-												{session.user.name}
-											</span>
-											<span className="truncate text-xs">
-												{session.user.email}
-											</span>
-										</div>
-									</SidebarMenuButton>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent
-									className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-									side="bottom"
-									align="end"
-									sideOffset={4}
-								>
-									<DropdownMenuLabel>
-										{t('userMenu.myAccount')}
-									</DropdownMenuLabel>
-									<DropdownMenuSeparator />
-									<DropdownMenuItem asChild>
-										<Link href="/profile" className="cursor-pointer">
-											<User className="mr-2 h-4 w-4" />
-											{t('userMenu.profile')}
-										</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem
-										onClick={handleLogout}
-										className="text-destructive focus:text-destructive"
-									>
-										<LogOut className="mr-2 h-4 w-4" />
-										{t('userMenu.logout')}
-									</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
+							<SidebarMenuButton size="lg" className="pointer-events-none">
+								<Skeleton className="h-8 w-8 rounded-lg" />
+								<div className="grid flex-1 gap-1 text-left text-sm leading-tight">
+									<Skeleton className="h-4 w-24" />
+									<Skeleton className="h-3 w-32" />
+								</div>
+								<Skeleton className="ml-auto size-4" />
+							</SidebarMenuButton>
 						</SidebarMenuItem>
-					)}
+					) : session?.user ? (
+						<FadeIn delay={200}>
+							<SidebarMenuItem>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<SidebarMenuButton
+											size="lg"
+											className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+										>
+											<Avatar className="h-8 w-8 rounded-lg">
+												<AvatarImage
+													src={session.user.image || ''}
+													alt={session.user.name || ''}
+												/>
+												<AvatarFallback className="rounded-lg bg-linear-to-r from-primary to-accent text-white">
+													{getUserInitials(session.user.name)}
+												</AvatarFallback>
+											</Avatar>
+											<div className="grid flex-1 text-left text-sm leading-tight">
+												<span className="truncate font-semibold">
+													{session.user.name}
+												</span>
+												<span className="truncate text-xs">
+													{session.user.email}
+												</span>
+											</div>
+											<ChevronUp className="ml-auto size-4" />
+										</SidebarMenuButton>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent
+										className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+										side="bottom"
+										align="end"
+										sideOffset={4}
+									>
+										<DropdownMenuLabel>
+											{t('userMenu.myAccount')}
+										</DropdownMenuLabel>
+										<DropdownMenuSeparator />
+										<DropdownMenuItem
+											asChild
+											className="cursor-pointer focus:bg-sidebar-accent focus:text-sidebar-accent-foreground"
+										>
+											<Link href="/profile" className="cursor-pointer">
+												<User className="mr-2 h-4 w-4" />
+												{t('userMenu.profile')}
+											</Link>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onClick={handleLogout}
+											className="cursor-pointer text-destructive focus:text-destructive focus:bg-sidebar-accent"
+										>
+											<LogOut className="mr-2 h-4 w-4" />
+											{t('userMenu.logout')}
+										</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</SidebarMenuItem>
+						</FadeIn>
+					) : null}
 				</SidebarMenu>
 			</SidebarFooter>
 			<SidebarRail />
