@@ -127,3 +127,6 @@ export type DashboardInsightsResponse = {
 		changeText: string;
 	};
 };
+
+export type Period = 'day' | 'week' | 'month';
+export type Limit = 10 | 25 | 50;

@@ -9,9 +9,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-
-export type Period = 'day' | 'week' | 'month';
-export type Limit = 10 | 25 | 50;
+import type { Limit, Period } from '@/types/dashboard';
 
 type PeriodTogglesProps = {
 	value: string;
