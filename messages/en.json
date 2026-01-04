@@ -53,5 +53,12 @@
 			"year": "Year",
 			"top": "Top {count}"
 		}
+	},
+	"api_errors": {
+		"default_title": "Something went wrong",
+		"default_message": "An unknown error occurred.",
+		"unauthorized": "Your session has expired. Please refresh the page or log in again.",
+		"server_error": "Failed to fetch dashboard data. Please try again later.",
+		"retry_button": "Try Again"
 	}
 }
