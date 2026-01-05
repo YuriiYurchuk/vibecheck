@@ -1,15 +1,19 @@
+import { cookies } from 'next/headers';
 import { BackgroundSyncer } from '@/components/dashboard/background-syncer';
 import { DashboardHeader } from '@/components/layout/dashboard-header';
 import { AppSidebar } from '@/components/layout/sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const cookieStore = await cookies();
+	const defaultOpen = cookieStore.get('sidebar_state')?.value !== 'false';
+
 	return (
-		<SidebarProvider>
+		<SidebarProvider defaultOpen={defaultOpen}>
 			<AppSidebar />
 			<SidebarInset>
 				<BackgroundSyncer />
