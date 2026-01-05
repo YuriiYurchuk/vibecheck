@@ -52,6 +52,12 @@
 			"month": "Month",
 			"year": "Year",
 			"top": "Top {count}"
+		},
+		"stats": {
+			"total_hours": "Total Hours",
+			"total_plays": "Total Plays",
+			"unique_artists": "Unique Artists",
+			"unique_tracks": "Unique Tracks"
 		}
 	},
 	"api_errors": {

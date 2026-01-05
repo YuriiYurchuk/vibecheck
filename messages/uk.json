@@ -52,6 +52,12 @@
 			"month": "Місяць",
 			"year": "Рік",
 			"top": "Топ {count}"
+		},
+		"stats": {
+			"total_hours": "Годин прослухано",
+			"total_plays": "Прослуховувань",
+			"unique_artists": "Унікальних виконавців",
+			"unique_tracks": "Унікальних треків"
 		}
 	},
 	"api_errors": {
