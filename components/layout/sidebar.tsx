@@ -10,11 +10,13 @@ import {
 	LogOut,
 	Music2,
 	User,
+	X,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Logo } from '@/components/logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -47,7 +49,7 @@ export function AppSidebar() {
 	const pathname = usePathname();
 	const locale = useLocale();
 	const { data: session, isPending } = useSession();
-	const { state } = useSidebar();
+	const { state, isMobile, setOpenMobile } = useSidebar();
 
 	const currentPath = pathname.replace(`/${locale}`, '') || '/';
 
@@ -102,22 +104,38 @@ export function AppSidebar() {
 	return (
 		<Sidebar collapsible="icon">
 			<SidebarHeader>
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" asChild>
-							<Link href="/dashboard">
-								<div className="flex aspect-square size-8 items-center justify-center rounded-lg">
-									<Logo className="size-6 text-primary dark:text-white" />
-								</div>
-								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary to-accent">
-										Vibecheck
-									</span>
-								</div>
-							</Link>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
+				<div className="flex w-full items-center justify-between pr-2">
+					<SidebarMenu className="flex-1">
+						<SidebarMenuItem>
+							<SidebarMenuButton size="lg" asChild>
+								<Link
+									href="/dashboard"
+									onClick={() => isMobile && setOpenMobile(false)}
+								>
+									<div className="flex aspect-square size-8 items-center justify-center rounded-lg">
+										<Logo className="size-6 text-primary dark:text-white" />
+									</div>
+									<div className="grid flex-1 text-left text-sm leading-tight">
+										<span className="truncate font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary to-accent">
+											Vibecheck
+										</span>
+									</div>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+					{isMobile && (
+						<Button
+							variant="ghost"
+							size="icon"
+							className="ml-2 h-8 w-8 shrink-0 text-muted-foreground"
+							onClick={() => setOpenMobile(false)}
+						>
+							<X className="size-5" />
+							<span className="sr-only">Close sidebar</span>
+						</Button>
+					)}
+				</div>
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>

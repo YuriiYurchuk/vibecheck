@@ -55,13 +55,9 @@ export const ChartSkeleton = () => (
 				<Skeleton className="w-full rounded-t h-[40%]" />
 			</div>
 			<div className="flex justify-between mt-4 gap-2">
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
-				<Skeleton className="h-3 w-full" />
+				{Array.from({ length: 7 }).map((_, i) => (
+					<Skeleton className="h-3 w-full" key={i} />
+				))}
 			</div>
 		</div>
 	</div>
@@ -103,31 +99,26 @@ export const ArtistCardSkeleton = () => (
 export const ContentSkeleton = () => (
 	<div className="space-y-6">
 		<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-			<StatCardSkeleton />
-			<StatCardSkeleton />
-			<StatCardSkeleton />
-			<StatCardSkeleton />
+			{Array.from({ length: 4 }).map((_, i) => (
+				<StatCardSkeleton key={i} />
+			))}
 		</div>
 		<ChartSkeleton />
 		<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 			<div className="space-y-4">
 				<Skeleton className="h-7 w-36" />
 				<div className="space-y-3">
-					<TrackCardSkeleton />
-					<TrackCardSkeleton />
-					<TrackCardSkeleton />
-					<TrackCardSkeleton />
-					<TrackCardSkeleton />
+					{Array.from({ length: 5 }).map((_, i) => (
+						<TrackCardSkeleton key={i} />
+					))}
 				</div>
 			</div>
 			<div className="space-y-4">
 				<Skeleton className="h-7 w-36" />
 				<div className="space-y-3">
-					<ArtistCardSkeleton />
-					<ArtistCardSkeleton />
-					<ArtistCardSkeleton />
-					<ArtistCardSkeleton />
-					<ArtistCardSkeleton />
+					{Array.from({ length: 5 }).map((_, i) => (
+						<ArtistCardSkeleton key={i} />
+					))}
 				</div>
 			</div>
 		</div>
