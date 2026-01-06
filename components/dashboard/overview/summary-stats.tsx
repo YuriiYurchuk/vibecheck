@@ -11,32 +11,32 @@ type SummaryStatsGridProps = {
 };
 
 export const SummaryStatsGrid = ({ summary }: SummaryStatsGridProps) => {
-	const t = useTranslations('dashboard.stats');
+	const tStats = useTranslations('dashboard.pages.overview.stats');
 
 	const statCards = [
 		{
 			id: 'total-hours',
 			icon: <Clock className="w-5 h-5 text-primary" />,
-			title: t('total_hours'),
+			title: tStats('total_hours'),
 			value: summary.totalHours,
 			suffix: 'h',
 		},
 		{
 			id: 'total-plays',
 			icon: <Music className="w-5 h-5 text-primary" />,
-			title: t('total_plays'),
+			title: tStats('total_plays'),
 			value: summary.totalPlays,
 		},
 		{
 			id: 'unique-artists',
 			icon: <Mic2 className="w-5 h-5 text-primary" />,
-			title: t('unique_artists'),
+			title: tStats('unique_artists'),
 			value: summary.uniqueArtists,
 		},
 		{
 			id: 'unique-tracks',
 			icon: <Disc3 className="w-5 h-5 text-primary" />,
-			title: t('unique_tracks'),
+			title: tStats('unique_tracks'),
 			value: summary.uniqueTracks,
 		},
 	];

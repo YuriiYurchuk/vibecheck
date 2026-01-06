@@ -28,7 +28,7 @@ type LimitSelectProps = {
 };
 
 export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
-	const t = useTranslations('dashboard.filters');
+	const tFilters = useTranslations('dashboard.shared.filters');
 	return (
 		<ButtonGroup className="p-1 border border-border/50 rounded-lg">
 			<Button
@@ -37,7 +37,7 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				size="sm"
 				className="cursor-pointer"
 			>
-				{t('day')}
+				{tFilters('day')}
 			</Button>
 			<Button
 				variant={value === 'week' ? 'default' : 'ghost'}
@@ -45,7 +45,7 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				size="sm"
 				className="cursor-pointer"
 			>
-				{t('week')}
+				{tFilters('week')}
 			</Button>
 			<Button
 				variant={value === 'month' ? 'default' : 'ghost'}
@@ -53,14 +53,14 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				size="sm"
 				className="cursor-pointer"
 			>
-				{t('month')}
+				{tFilters('month')}
 			</Button>
 		</ButtonGroup>
 	);
 };
 
 export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
-	const t = useTranslations('dashboard.filters');
+	const tFilters = useTranslations('dashboard.shared.filters');
 	const isYearSelected = /^\d{4}$/.test(value);
 	const currentYear = new Date().getFullYear();
 	const startYear = fromYear;
@@ -78,7 +78,7 @@ export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 					isYearSelected ? 'border-primary ring-1 ring-primary' : ''
 				)}
 			>
-				<SelectValue placeholder={t('Year')} />
+				<SelectValue placeholder={tFilters('year')} />
 			</SelectTrigger>
 			<SelectContent>
 				{years.map((year) => (
@@ -92,7 +92,7 @@ export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 };
 
 export const LimitSelect = ({ value, onChange }: LimitSelectProps) => {
-	const t = useTranslations('dashboard.filters');
+	const tFilters = useTranslations('dashboard.shared.filters');
 	const limits: Limit[] = [10, 25, 50];
 
 	return (
@@ -110,7 +110,7 @@ export const LimitSelect = ({ value, onChange }: LimitSelectProps) => {
 						value={limit.toString()}
 						className="cursor-pointer"
 					>
-						{t('top', { count: limit })}
+						{tFilters('top', { count: String(limit) })}
 					</SelectItem>
 				))}
 			</SelectContent>

@@ -45,7 +45,7 @@ import { signOut, useSession } from '@/lib/auth/client';
 import { cn } from '@/lib/utils';
 
 export function AppSidebar() {
-	const t = useTranslations('sidebar');
+	const tSidebar = useTranslations('dashboard.sidebar');
 	const pathname = usePathname();
 	const locale = useLocale();
 	const { data: session, isPending } = useSession();
@@ -70,31 +70,31 @@ export function AppSidebar() {
 
 	const items = [
 		{
-			title: t('routes.overview'),
+			title: tSidebar('routes.overview'),
 			url: '/dashboard',
 			icon: LayoutDashboard,
 			color: 'text-chart-3',
 		},
 		{
-			title: t('routes.listeningHistory'),
+			title: tSidebar('routes.listeningHistory'),
 			url: '/dashboard/listening',
 			icon: Activity,
 			color: 'text-chart-2',
 		},
 		{
-			title: t('routes.moodAnalysis'),
+			title: tSidebar('routes.moodAnalysis'),
 			url: '/dashboard/mood',
 			icon: HeartPulse,
 			color: 'text-chart-1',
 		},
 		{
-			title: t('routes.insights'),
+			title: tSidebar('routes.insights'),
 			url: '/dashboard/insights',
 			icon: Lightbulb,
 			color: 'text-chart-5',
 		},
 		{
-			title: t('routes.recentPlays'),
+			title: tSidebar('routes.recentPlays'),
 			url: '/dashboard/recent',
 			icon: Music2,
 			color: 'text-chart-4',
@@ -182,10 +182,10 @@ export function AppSidebar() {
 			<SidebarFooter>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton asChild tooltip={t('backToHome')}>
+						<SidebarMenuButton asChild tooltip={tSidebar('backToHome')}>
 							<Link href="/">
 								<Home className="opacity-70" />
-								<span>{t('backToHome')}</span>
+								<span>{tSidebar('backToHome')}</span>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
@@ -240,7 +240,7 @@ export function AppSidebar() {
 										sideOffset={4}
 									>
 										<DropdownMenuLabel>
-											{t('userMenu.myAccount')}
+											{tSidebar('userMenu.myAccount')}
 										</DropdownMenuLabel>
 										<DropdownMenuSeparator />
 										<DropdownMenuItem
@@ -249,7 +249,7 @@ export function AppSidebar() {
 										>
 											<Link href="/profile" className="cursor-pointer">
 												<User className="mr-2 h-4 w-4" />
-												{t('userMenu.profile')}
+												{tSidebar('userMenu.profile')}
 											</Link>
 										</DropdownMenuItem>
 										<DropdownMenuItem
@@ -257,7 +257,7 @@ export function AppSidebar() {
 											className="cursor-pointer text-destructive focus:text-destructive focus:bg-sidebar-accent"
 										>
 											<LogOut className="mr-2 h-4 w-4" />
-											{t('userMenu.logout')}
+											{tSidebar('userMenu.logout')}
 										</DropdownMenuItem>
 									</DropdownMenuContent>
 								</DropdownMenu>

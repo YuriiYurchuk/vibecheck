@@ -1,0 +1,8 @@
+{
+	"header": {
+		"changeLanguage": "Change language",
+		"toggleTheme": "Toggle theme",
+		"theme": { "light": "Light", "dark": "Dark", "system": "System" },
+		"languages": { "english": "English", "ukrainian": "Українська" }
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"header": {
+		"changeLanguage": "Змінити мову",
+		"toggleTheme": "Змінити тему",
+		"theme": { "light": "Світла", "dark": "Темна", "system": "Системна" },
+		"languages": { "english": "English", "ukrainian": "Українська" }
+	}
+}
