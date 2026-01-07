@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+type ApiErrorKey = keyof IntlMessages['dashboard']['api_errors'];
+
 interface ErrorStateProps {
 	title?: string;
 	message?: string;
@@ -18,8 +20,8 @@ export const ErrorState = ({
 	retry,
 	className,
 }: ErrorStateProps) => {
-	const t = useTranslations('api_errors');
-	let translationKey = 'default_message';
+	const tApi = useTranslations('dashboard.api_errors');
+	let translationKey: ApiErrorKey = 'default_message';
 
 	if (message === 'Unauthorized') {
 		translationKey = 'unauthorized';
@@ -27,8 +29,8 @@ export const ErrorState = ({
 		translationKey = 'server_error';
 	}
 
-	const userMessage = t(translationKey);
-	const displayTitle = title || t('default_title');
+	const userMessage = tApi(translationKey);
+	const displayTitle = title || tApi('default_title');
 
 	return (
 		<div
@@ -51,7 +53,7 @@ export const ErrorState = ({
 			{retry && (
 				<Button onClick={retry} variant="outline" size="sm" className="gap-2">
 					<RefreshCcw className="w-4 h-4" />
-					{t('retry_button')}
+					{tApi('retry_button')}
 				</Button>
 			)}
 		</div>

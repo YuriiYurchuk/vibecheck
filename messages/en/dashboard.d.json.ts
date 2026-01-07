@@ -2,61 +2,61 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-	sidebar: {
-		routes: {
-			overview: 'Overview';
-			listeningHistory: 'Listening History';
-			moodAnalysis: 'Mood Analysis';
-			insights: 'Insights';
-			recentPlays: 'Recent Plays';
-			profile: 'Profile';
-		};
-		userMenu: {
-			myAccount: 'My Account';
-			profile: 'Profile';
-			logout: 'Logout';
-		};
-		toggleMenu: 'Toggle menu';
-		backToHome: 'Back to Home';
-	};
-	pages: {
-		overview: {
-			greeting: {
-				morning: 'Good morning, {name}';
-				afternoon: 'Good afternoon, {name}';
-				evening: 'Good evening, {name}';
-				default: 'Welcome back, {name}';
-			};
-			subtitle: "Here's what you've been listening to recently";
-			stats: {
-				total_hours: 'Total Hours';
-				total_plays: 'Total Plays';
-				unique_artists: 'Unique Artists';
-				unique_tracks: 'Unique Tracks';
-			};
-			mediaList: {
-				top_tracks: 'Top Tracks';
-				top_artists: 'Top Artists';
-				no_tracks: 'No tracks to display';
-				no_artists: 'No artists to display';
-			};
-		};
-	};
-	shared: {
-		filters: {
-			day: 'Day';
-			week: 'Week';
-			month: 'Month';
-			year: 'Year';
-			top: 'Top {count}';
-		};
-	};
-	api_errors: {
-		default_title: 'Something went wrong';
-		default_message: 'An unknown error occurred.';
-		unauthorized: 'Your session has expired. Please refresh the page or log in again.';
-		server_error: 'Failed to fetch dashboard data. Please try again later.';
-		retry_button: 'Try Again';
-	};
+	"sidebar": {
+		"routes": {
+			"overview": "Overview",
+			"listeningHistory": "Listening History",
+			"moodAnalysis": "Mood Analysis",
+			"insights": "Insights",
+			"recentPlays": "Recent Plays",
+			"profile": "Profile"
+		},
+		"userMenu": {
+			"myAccount": "My Account",
+			"profile": "Profile",
+			"logout": "Logout"
+		},
+		"toggleMenu": "Toggle menu",
+		"backToHome": "Back to Home"
+	},
+	"pages": {
+		"overview": {
+			"greeting": {
+				"morning": "Good morning, {name}",
+				"afternoon": "Good afternoon, {name}",
+				"evening": "Good evening, {name}",
+				"default": "Welcome back, {name}"
+			},
+			"subtitle": "Here's what you've been listening to recently",
+			"stats": {
+				"total_hours": "Total Hours",
+				"total_plays": "Total Plays",
+				"unique_artists": "Unique Artists",
+				"unique_tracks": "Unique Tracks"
+			},
+			"mediaList": {
+				"top_tracks": "Top Tracks",
+				"top_artists": "Top Artists",
+				"no_tracks": "No tracks to display",
+				"no_artists": "No artists to display"
+			}
+		}
+	},
+	"shared": {
+		"filters": {
+			"day": "Day",
+			"week": "Week",
+			"month": "Month",
+			"year": "Year",
+			"top": "Top {count}"
+		}
+	},
+	"api_errors": {
+		"default_title": "Something went wrong",
+		"default_message": "An unknown error occurred.",
+		"unauthorized": "Your session has expired. Please refresh the page or log in again.",
+		"server_error": "Failed to fetch dashboard data. Please try again later.",
+		"retry_button": "Try Again"
+	}
 };
 export default messages;
