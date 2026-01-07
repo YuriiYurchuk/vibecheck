@@ -34,8 +34,11 @@ declare const messages: {
 				unique_artists: 'Unique Artists';
 				unique_tracks: 'Unique Tracks';
 			};
-			mediaCard: {
-				plays: 'plays';
+			mediaList: {
+				top_tracks: 'Top Tracks';
+				top_artists: 'Top Artists';
+				no_tracks: 'No tracks to display';
+				no_artists: 'No artists to display';
 			};
 		};
 	};
