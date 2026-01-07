@@ -27,7 +27,7 @@ export const StatCard = ({
 	className,
 }: StatCardProps) => {
 	return (
-		<Card className={className}>
+		<Card className={cn('flex flex-col h-full', className)}>
 			<CardHeader>
 				<div className="flex items-center gap-3">
 					<div className="bg-primary/10 p-2 rounded-lg">{icon}</div>
