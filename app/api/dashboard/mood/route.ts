@@ -1,3 +1,5 @@
+import { endOfMonth, startOfMonth } from 'date-fns';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import { NextResponse } from 'next/server';
 import { requireSession } from '@/lib/auth/session';
 import { getDateSince, validatePeriod } from '@/lib/helpers';
@@ -14,10 +16,23 @@ export const GET = async (req: Request) => {
 		const session = await requireSession();
 		const userId = session?.user.id;
 		const timezone = session.user.timezone || 'UTC';
-
 		const { searchParams } = new URL(req.url);
 		const period = validatePeriod(searchParams.get('period'));
-		const since = getDateSince(period, timezone);
+		const mode = searchParams.get('mode') || 'rolling';
+
+		let since: Date;
+		let until: Date | undefined;
+
+		if (mode === 'calendar') {
+			const nowInTZ = toZonedTime(new Date(), timezone);
+			const monthStartInTZ = startOfMonth(nowInTZ);
+			const monthEndInTZ = endOfMonth(nowInTZ);
+			since = fromZonedTime(monthStartInTZ, timezone);
+			until = fromZonedTime(monthEndInTZ, timezone);
+		} else {
+			since = getDateSince(period, timezone);
+			until = undefined;
+		}
 
 		const [
 			averageFeatures,
@@ -26,11 +41,11 @@ export const GET = async (req: Request) => {
 			scatterData,
 			tempoDistribution,
 		] = await Promise.all([
-			getAverageAudioFeatures(userId, since),
-			getKeyDistribution(userId, since),
-			getModeDistribution(userId, since),
-			getValenceEnergyScatter(userId, since),
-			getTempoDistribution(userId, since),
+			getAverageAudioFeatures(userId, since, until),
+			getKeyDistribution(userId, since, until),
+			getModeDistribution(userId, since, until),
+			getValenceEnergyScatter(userId, since, until),
+			getTempoDistribution(userId, since, until),
 		]);
 
 		return NextResponse.json({

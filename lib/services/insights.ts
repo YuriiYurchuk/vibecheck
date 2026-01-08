@@ -1,35 +1,40 @@
-import { startOfDay, subDays } from 'date-fns';
+import {
+	endOfMonth,
+	startOfDay,
+	startOfMonth,
+	subDays,
+	subMonths,
+} from 'date-fns';
 import { fromZonedTime, toZonedTime } from 'date-fns-tz';
-import { prisma } from '@/lib/db';
+import { Prisma, prisma } from '@/lib/db';
 
-const getLast30DaysStart = (timezone: string): Date => {
-	const nowInTZ = toZonedTime(new Date(), timezone);
-	const todayStartInTZ = startOfDay(nowInTZ);
-	const last30DaysInTZ = subDays(todayStartInTZ, 30);
-	return fromZonedTime(last30DaysInTZ, timezone);
-};
-
-const getPrevious30DaysRange = (
-	timezone: string
+export const getMonthRange = (
+	timezone: string,
+	monthsAgo: number = 0
 ): { start: Date; end: Date } => {
 	const nowInTZ = toZonedTime(new Date(), timezone);
-	const todayStartInTZ = startOfDay(nowInTZ);
-	const last30DaysStartInTZ = subDays(todayStartInTZ, 30);
-	const previous30DaysStartInTZ = subDays(todayStartInTZ, 60);
+	const targetMonthInTZ = subMonths(nowInTZ, monthsAgo);
+	const monthStartInTZ = startOfMonth(targetMonthInTZ);
+	const monthEndInTZ = endOfMonth(targetMonthInTZ);
 
 	return {
-		start: fromZonedTime(previous30DaysStartInTZ, timezone),
-		end: fromZonedTime(last30DaysStartInTZ, timezone),
+		start: fromZonedTime(monthStartInTZ, timezone),
+		end: fromZonedTime(monthEndInTZ, timezone),
 	};
 };
 
-export const getTotalHours = async (userId: string, since: Date) => {
+export const getTotalHours = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<Array<{ total_ms: bigint }>>`
 		SELECT SUM(t."durationMs") as total_ms
 		FROM play_history ph
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 	`;
 
 	const totalMs = Number(result[0]?.total_ms || 0);
@@ -43,7 +48,8 @@ export const getTotalHours = async (userId: string, since: Date) => {
 export const getMostActiveDay = async (
 	userId: string,
 	since: Date,
-	timezone: string
+	timezone: string,
+	until?: Date
 ) => {
 	const result = await prisma.$queryRaw<
 		Array<{ day_of_week: number; count: bigint }>
@@ -54,6 +60,7 @@ export const getMostActiveDay = async (
 		FROM play_history
 		WHERE "userId" = ${userId}
 			AND "playedAt" >= ${since}
+			${until ? Prisma.sql`AND "playedAt" <= ${until}` : Prisma.empty}
 		GROUP BY day_of_week
 		ORDER BY count DESC
 		LIMIT 1
@@ -83,7 +90,8 @@ export const getMostActiveDay = async (
 export const getPeakListeningHour = async (
 	userId: string,
 	since: Date,
-	timezone: string
+	timezone: string,
+	until?: Date
 ) => {
 	const result = await prisma.$queryRaw<Array<{ hour: number; count: bigint }>>`
 		SELECT 
@@ -92,6 +100,7 @@ export const getPeakListeningHour = async (
 		FROM play_history
 		WHERE "userId" = ${userId}
 			AND "playedAt" >= ${since}
+			${until ? Prisma.sql`AND "playedAt" <= ${until}` : Prisma.empty}
 		GROUP BY hour
 		ORDER BY count DESC
 		LIMIT 1
@@ -105,15 +114,16 @@ export const getPeakListeningHour = async (
 
 	return {
 		hour,
-		range: `${String(hour).padStart(2, '0')}:00-${String(hour + 1).padStart(
-			2,
-			'0'
-		)}:00`,
+		range: `${String(hour).padStart(2, '0')}:00-${String(hour + 1).padStart(2, '0')}:00`,
 		count: Number(result[0].count),
 	};
 };
 
-export const getMusicalMood = async (userId: string, since: Date) => {
+export const getMusicalMood = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{ avg_energy: number | null; avg_valence: number | null }>
 	>`
@@ -124,6 +134,7 @@ export const getMusicalMood = async (userId: string, since: Date) => {
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 			AND t.energy IS NOT NULL
 			AND t.valence IS NOT NULL
 	`;
@@ -131,40 +142,22 @@ export const getMusicalMood = async (userId: string, since: Date) => {
 	const energy = result[0]?.avg_energy ?? 0.5;
 	const valence = result[0]?.avg_valence ?? 0.5;
 
-	let mood = 'Balanced';
-	let moodEmoji = '😐';
-
-	if (energy > 0.7 && valence > 0.7) {
-		mood = 'Energetic & Happy';
-		moodEmoji = '🔥😊';
-	} else if (energy > 0.7 && valence < 0.3) {
-		mood = 'Intense & Emotional';
-		moodEmoji = '⚡😤';
-	} else if (energy < 0.3 && valence > 0.7) {
-		mood = 'Calm & Positive';
-		moodEmoji = '😌✨';
-	} else if (energy < 0.3 && valence < 0.3) {
-		mood = 'Melancholic & Thoughtful';
-		moodEmoji = '🌧️💭';
-	}
-
 	return {
-		mood,
-		moodEmoji,
 		energy,
 		valence,
 	};
 };
 
 export const getLongestStreak = async (userId: string, timezone: string) => {
-	const sixMonthsAgo = getLast30DaysStart(timezone);
-	const sixMonthsAgoAdjusted = subDays(sixMonthsAgo, 150);
+	const nowInTZ = toZonedTime(new Date(), timezone);
+	const sixMonthsAgoInTZ = subDays(startOfDay(nowInTZ), 180);
+	const sixMonthsAgo = fromZonedTime(sixMonthsAgoInTZ, timezone);
 
 	const result = await prisma.$queryRaw<Array<{ date: string }>>`
 		SELECT DISTINCT DATE("playedAt" AT TIME ZONE ${timezone}) as date
 		FROM play_history
 		WHERE "userId" = ${userId}
-			AND "playedAt" >= ${sixMonthsAgoAdjusted}
+			AND "playedAt" >= ${sixMonthsAgo}
 		ORDER BY date ASC
 	`;
 
@@ -172,15 +165,20 @@ export const getLongestStreak = async (userId: string, timezone: string) => {
 		return { longestStreak: 0, currentStreak: 0 };
 	}
 
-	let currentStreak = 1;
 	let longestStreak = 1;
 	let tempStreak = 1;
+	let currentStreak = 0;
 
 	const todayInTZ = toZonedTime(new Date(), timezone);
 	const todayStr = startOfDay(todayInTZ).toISOString().split('T')[0];
 	const yesterdayInTZ = subDays(todayInTZ, 1);
 	const yesterdayStr = startOfDay(yesterdayInTZ).toISOString().split('T')[0];
-	const lastDate = result[result.length - 1].date;
+	const tomorrowInTZ = subDays(todayInTZ, -1);
+	const tomorrowStr = startOfDay(tomorrowInTZ).toISOString().split('T')[0];
+
+	const lastDate = new Date(result[result.length - 1].date)
+		.toISOString()
+		.split('T')[0];
 
 	for (let i = 1; i < result.length; i++) {
 		const prevDate = new Date(result[i - 1].date);
@@ -198,8 +196,13 @@ export const getLongestStreak = async (userId: string, timezone: string) => {
 		}
 	}
 
-	if (lastDate === todayStr || lastDate === yesterdayStr) {
+	if (
+		lastDate === todayStr ||
+		lastDate === yesterdayStr ||
+		lastDate === tomorrowStr
+	) {
 		currentStreak = 1;
+
 		for (let i = result.length - 2; i >= 0; i--) {
 			const currDate = new Date(result[i + 1].date);
 			const prevDate = new Date(result[i].date);
@@ -213,8 +216,6 @@ export const getLongestStreak = async (userId: string, timezone: string) => {
 				break;
 			}
 		}
-	} else {
-		currentStreak = 0;
 	}
 
 	return {
@@ -223,23 +224,28 @@ export const getLongestStreak = async (userId: string, timezone: string) => {
 	};
 };
 
-export const compare30DayPeriods = async (userId: string, timezone: string) => {
-	const last30DaysStart = getLast30DaysStart(timezone);
-	const previousPeriod = getPrevious30DaysRange(timezone);
+export const compareMonths = async (
+	userId: string,
+	timezone: string,
+	currentMonthsAgo: number = 0
+) => {
+	const currentMonth = getMonthRange(timezone, currentMonthsAgo);
+	const previousMonth = getMonthRange(timezone, currentMonthsAgo + 1);
 
 	const [current, previous] = await Promise.all([
 		prisma.$queryRaw<Array<{ count: bigint }>>`
 			SELECT COUNT(*) as count
 			FROM play_history
 			WHERE "userId" = ${userId}
-				AND "playedAt" >= ${last30DaysStart}
+				AND "playedAt" >= ${currentMonth.start}
+				AND "playedAt" <= ${currentMonth.end}
 		`,
 		prisma.$queryRaw<Array<{ count: bigint }>>`
 			SELECT COUNT(*) as count
 			FROM play_history
 			WHERE "userId" = ${userId}
-				AND "playedAt" >= ${previousPeriod.start}
-				AND "playedAt" < ${previousPeriod.end}
+				AND "playedAt" >= ${previousMonth.start}
+				AND "playedAt" <= ${previousMonth.end}
 		`,
 	]);
 
@@ -256,11 +262,5 @@ export const compare30DayPeriods = async (userId: string, timezone: string) => {
 		previous: previousCount,
 		percentChange,
 		isIncrease: percentChange > 0,
-		changeText:
-			percentChange === 0
-				? 'Same as previous period'
-				: percentChange > 0
-					? `+${percentChange}% more than previous period`
-					: `${Math.abs(percentChange)}% less than previous period`,
 	};
 };

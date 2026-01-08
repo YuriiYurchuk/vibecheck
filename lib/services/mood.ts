@@ -1,6 +1,10 @@
-import { prisma } from '@/lib/db';
+import { Prisma, prisma } from '@/lib/db';
 
-export const getAverageAudioFeatures = async (userId: string, since: Date) => {
+export const getAverageAudioFeatures = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{
 			avg_acousticness: number | null;
@@ -16,7 +20,7 @@ export const getAverageAudioFeatures = async (userId: string, since: Date) => {
 			total_tracks: bigint;
 		}>
 	>`
-		SELECT 
+	SELECT 
 			AVG(t.acousticness) as avg_acousticness,
 			AVG(t.danceability) as avg_danceability,
 			AVG(t.energy) as avg_energy,
@@ -32,6 +36,7 @@ export const getAverageAudioFeatures = async (userId: string, since: Date) => {
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 	`;
 
 	const row = result[0];
@@ -51,20 +56,25 @@ export const getAverageAudioFeatures = async (userId: string, since: Date) => {
 	};
 };
 
-export const getKeyDistribution = async (userId: string, since: Date) => {
+export const getKeyDistribution = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{
 			key: number | null;
 			count: bigint;
 		}>
 	>`
-		SELECT 
+	SELECT 
 			t.key,
 			COUNT(*) as count
 		FROM play_history ph
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 			AND t.key IS NOT NULL
 		GROUP BY t.key
 		ORDER BY t.key ASC
@@ -93,7 +103,11 @@ export const getKeyDistribution = async (userId: string, since: Date) => {
 	}));
 };
 
-export const getModeDistribution = async (userId: string, since: Date) => {
+export const getModeDistribution = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{
 			mode: number | null;
@@ -107,6 +121,7 @@ export const getModeDistribution = async (userId: string, since: Date) => {
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 			AND t.mode IS NOT NULL
 		GROUP BY t.mode
 	`;
@@ -119,7 +134,11 @@ export const getModeDistribution = async (userId: string, since: Date) => {
 	};
 };
 
-export const getValenceEnergyScatter = async (userId: string, since: Date) => {
+export const getValenceEnergyScatter = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{
 			track_id: string;
@@ -139,6 +158,7 @@ export const getValenceEnergyScatter = async (userId: string, since: Date) => {
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 			AND t.valence IS NOT NULL
 			AND t.energy IS NOT NULL
 		GROUP BY t.id, t.name, t.valence, t.energy
@@ -155,7 +175,11 @@ export const getValenceEnergyScatter = async (userId: string, since: Date) => {
 	}));
 };
 
-export const getTempoDistribution = async (userId: string, since: Date) => {
+export const getTempoDistribution = async (
+	userId: string,
+	since: Date,
+	until?: Date
+) => {
 	const result = await prisma.$queryRaw<
 		Array<{
 			tempo_range: string;
@@ -174,6 +198,7 @@ export const getTempoDistribution = async (userId: string, since: Date) => {
 		JOIN tracks t ON ph."trackId" = t.id
 		WHERE ph."userId" = ${userId}
 			AND ph."playedAt" >= ${since}
+			${until ? Prisma.sql`AND ph."playedAt" <= ${until}` : Prisma.empty}
 			AND t.tempo IS NOT NULL
 		GROUP BY tempo_range
 		ORDER BY tempo_range

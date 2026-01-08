@@ -1,5 +1,5 @@
 export {
-	compare30DayPeriods,
+	compareMonths,
 	getLongestStreak,
 	getMostActiveDay,
 	getMusicalMood,

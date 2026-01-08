@@ -1,21 +1,27 @@
+import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 import { NextResponse } from 'next/server';
 import { requireSession } from '@/lib/auth/session';
-import { getDateSince } from '@/lib/helpers';
 import {
-	compare30DayPeriods,
+	compareMonths,
 	getLongestStreak,
+	getMonthRange,
 	getMostActiveDay,
 	getMusicalMood,
 	getPeakListeningHour,
 	getTotalHours,
 } from '@/lib/services/insights';
 
-export const GET = async () => {
+export const GET = async (request: Request) => {
 	try {
 		const session = await requireSession();
 		const userId = session.user.id;
 		const timezone = session.user.timezone || 'UTC';
-		const since = getDateSince('month', timezone);
+		const { searchParams } = new URL(request.url);
+		const monthsAgo = parseInt(searchParams.get('month') || '0', 10);
+		const validMonthsAgo = Math.max(0, Math.min(monthsAgo, 12));
+		const monthRange = getMonthRange(timezone, validMonthsAgo);
+		const { start: since, end: until } = monthRange;
 
 		const [
 			totalHours,
@@ -25,16 +31,20 @@ export const GET = async () => {
 			streak,
 			comparison,
 		] = await Promise.all([
-			getTotalHours(userId, since),
-			getMostActiveDay(userId, since, timezone),
-			getPeakListeningHour(userId, since, timezone),
-			getMusicalMood(userId, since),
+			getTotalHours(userId, since, until),
+			getMostActiveDay(userId, since, timezone, until),
+			getPeakListeningHour(userId, since, timezone, until),
+			getMusicalMood(userId, since, until),
 			getLongestStreak(userId, timezone),
-			compare30DayPeriods(userId, timezone),
+			compareMonths(userId, timezone, validMonthsAgo),
 		]);
 
+		const targetMonth = toZonedTime(since, timezone);
+		const periodName =
+			validMonthsAgo === 0 ? 'This Month' : format(targetMonth, 'MMMM yyyy');
+
 		return NextResponse.json({
-			period: 'Last 30 Days',
+			period: periodName,
 			totalHours,
 			mostActiveDay,
 			peakHour,
