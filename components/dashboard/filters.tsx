@@ -93,7 +93,7 @@ export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 
 export const LimitSelect = ({ value, onChange }: LimitSelectProps) => {
 	const tFilters = useTranslations('dashboard.shared.filters');
-	const limits: Limit[] = [10, 25, 50];
+	const limits: Limit[] = [10, 25];
 
 	return (
 		<Select

@@ -129,4 +129,4 @@ export type DashboardInsightsResponse = {
 };
 
 export type Period = 'day' | 'week' | 'month';
-export type Limit = 10 | 25 | 50;
+export type Limit = 10 | 25;
