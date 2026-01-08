@@ -101,7 +101,6 @@ export type DashboardInsightsResponse = {
 	};
 	mostActiveDay: {
 		day: string;
-		dayIndex: number;
 		count: number;
 	};
 	peakHour: {
@@ -110,8 +109,6 @@ export type DashboardInsightsResponse = {
 		count: number;
 	};
 	musicalMood: {
-		mood: string;
-		moodEmoji: string;
 		energy: number;
 		valence: number;
 	};
@@ -124,7 +121,6 @@ export type DashboardInsightsResponse = {
 		previous: number;
 		percentChange: number;
 		isIncrease: boolean;
-		changeText: string;
 	};
 };
 
