@@ -34,6 +34,10 @@ declare const messages: {
 				"unique_artists": "Unique Artists",
 				"unique_tracks": "Unique Tracks"
 			},
+			"charts": {
+				"weekly_activity": "Weekly Activity",
+				"plays_suffix": "plays"
+			},
 			"mediaList": {
 				"top_tracks": "Top Tracks",
 				"top_artists": "Top Artists",

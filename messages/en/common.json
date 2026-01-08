@@ -4,5 +4,11 @@
 		"toggleTheme": "Toggle theme",
 		"theme": { "light": "Light", "dark": "Dark", "system": "System" },
 		"languages": { "english": "English", "ukrainian": "Українська" }
+	},
+	"time": {
+		"now": "just now",
+		"minutes_ago": "{count}m",
+		"hours_ago": "{count}h",
+		"days_ago": "{count}d"
 	}
 }

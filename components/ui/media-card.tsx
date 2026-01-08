@@ -1,6 +1,6 @@
 'use client';
 
-import { ExternalLink, Mic2, Music } from 'lucide-react';
+import { ExternalLink, Headphones, Mic2, Music } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -77,7 +77,7 @@ export const MediaCard = ({ item, type, rank, className }: MediaCardProps) => {
 						)}
 					</div>
 					<div className="flex items-center gap-1.5 shrink-0">
-						<Music className="size-3.5 text-muted-foreground" />
+						<Headphones className="size-3.5 text-muted-foreground" />
 						<span className="text-sm font-semibold">{item.playCount}</span>
 					</div>
 					{item.href && (

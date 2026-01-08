@@ -4,5 +4,11 @@
 		"toggleTheme": "Змінити тему",
 		"theme": { "light": "Світла", "dark": "Темна", "system": "Системна" },
 		"languages": { "english": "English", "ukrainian": "Українська" }
+	},
+	"time": {
+		"now": "щойно",
+		"minutes_ago": "{count} хв",
+		"hours_ago": "{count} год",
+		"days_ago": "{count} дн"
 	}
 }

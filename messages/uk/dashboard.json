@@ -31,6 +31,10 @@
 				"unique_artists": "Унікальних виконавців",
 				"unique_tracks": "Унікальних треків"
 			},
+			"charts": {
+				"weekly_activity": "Активність за тиждень",
+				"plays_suffix": "прослуховувань"
+			},
 			"mediaList": {
 				"top_tracks": "Топ треки",
 				"top_artists": "Топ виконавці",
