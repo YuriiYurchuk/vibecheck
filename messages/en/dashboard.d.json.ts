@@ -29,39 +29,42 @@ declare const messages: {
 			},
 			"subtitle": "Here's what you've been listening to recently",
 			"stats": {
-				"total_hours": "Total Hours",
-				"total_plays": "Total Plays",
-				"unique_artists": "Unique Artists",
-				"unique_tracks": "Unique Tracks"
+				"totalHours": "Total Hours",
+				"totalPlays": "Total Plays",
+				"uniqueArtists": "Unique Artists",
+				"uniqueTracks": "Unique Tracks"
 			},
 			"charts": {
-				"weekly_activity": "Weekly Activity",
-				"plays_suffix": "plays"
+				"weeklyActivity": "Weekly Activity"
 			},
 			"mediaList": {
-				"top_tracks": "Top Tracks",
-				"top_artists": "Top Artists",
-				"no_tracks": "No tracks to display",
-				"no_artists": "No artists to display"
+				"topTracks": "Top Tracks",
+				"topArtists": "Top Artists",
+				"noTracks": "No tracks to display",
+				"noArtists": "No artists to display"
 			}
 		},
-		"listening": {}
+		"listening": {
+			"subtitle": "Your audio journey <highlight>{period}</highlight>",
+			"periodLast365": "over the last year",
+			"periodYear": "in {year}"
+		}
 	},
 	"shared": {
 		"filters": {
 			"day": "Day",
 			"week": "Week",
 			"month": "Month",
-			"last_365": "Last 365 Days",
+			"last365": "Last 365 Days",
 			"top": "Top {count}"
 		}
 	},
-	"api_errors": {
-		"default_title": "Something went wrong",
-		"default_message": "An unknown error occurred.",
+	"apiErrors": {
+		"defaultTitle": "Something went wrong",
+		"defaultMessage": "An unknown error occurred.",
 		"unauthorized": "Your session has expired. Please refresh the page or log in again.",
-		"server_error": "Failed to fetch dashboard data. Please try again later.",
-		"retry_button": "Try Again"
+		"serverError": "Failed to fetch dashboard data. Please try again later.",
+		"retryButton": "Try Again"
 	}
 };
 export default messages;

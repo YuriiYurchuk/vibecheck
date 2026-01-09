@@ -33,7 +33,7 @@ export const OverviewChart = ({ data, timezone }: OverviewChartProps) => {
 		<Card>
 			<CardHeader>
 				<CardTitle className="text-lg font-medium">
-					{tChart('weekly_activity')}
+					{tChart('weeklyActivity')}
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="px-6 pb-6">

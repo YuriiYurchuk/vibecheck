@@ -65,13 +65,13 @@ export const Overview = ({ greetingKey }: DashboardContentProps) => {
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						<div className="space-y-4">
 							<h2 className="text-xl font-semibold">
-								{tOverview('mediaList.top_tracks')}
+								{tOverview('mediaList.topTracks')}
 							</h2>
 							<MediaList items={data.topTracks} type="track" />
 						</div>
 						<div className="space-y-4">
 							<h2 className="text-xl font-semibold">
-								{tOverview('mediaList.top_artists')}
+								{tOverview('mediaList.topArtists')}
 							</h2>
 							<MediaList items={data.topArtists} type="artist" />
 						</div>

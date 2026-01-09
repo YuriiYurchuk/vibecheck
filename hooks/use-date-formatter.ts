@@ -45,9 +45,9 @@ export const useDateFormatter = (timezone?: string) => {
 				const days = differenceInDays(now, zonedDate);
 
 				if (mins < 1) return tTime('now');
-				if (mins < 60) return tTime('minutes_ago', { count: mins });
-				if (hours < 24) return tTime('hours_ago', { count: hours });
-				if (days < 7) return tTime('days_ago', { count: days });
+				if (mins < 60) return tTime('minutesAgo', { count: mins });
+				if (hours < 24) return tTime('hoursAgo', { count: hours });
+				if (days < 7) return tTime('daysAgo', { count: days });
 
 				return format(zonedDate, 'PP', { locale: currentLocale });
 			} catch (err) {

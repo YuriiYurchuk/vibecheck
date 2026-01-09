@@ -17,26 +17,26 @@ export const SummaryStatsGrid = ({ summary }: SummaryStatsGridProps) => {
 		{
 			id: 'total-hours',
 			icon: <Clock className="w-5 h-5 text-primary" />,
-			title: tStats('total_hours'),
+			title: tStats('totalHours'),
 			value: summary.totalHours,
 			suffix: 'h',
 		},
 		{
 			id: 'total-plays',
 			icon: <Music className="w-5 h-5 text-primary" />,
-			title: tStats('total_plays'),
+			title: tStats('totalPlays'),
 			value: summary.totalPlays,
 		},
 		{
 			id: 'unique-artists',
 			icon: <Mic2 className="w-5 h-5 text-primary" />,
-			title: tStats('unique_artists'),
+			title: tStats('uniqueArtists'),
 			value: summary.uniqueArtists,
 		},
 		{
 			id: 'unique-tracks',
 			icon: <Disc3 className="w-5 h-5 text-primary" />,
-			title: tStats('unique_tracks'),
+			title: tStats('uniqueTracks'),
 			value: summary.uniqueTracks,
 		},
 	];

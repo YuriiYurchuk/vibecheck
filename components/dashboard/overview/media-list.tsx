@@ -20,7 +20,7 @@ export const MediaList = ({ items, type }: MediaListProps) => {
 	if (items.length === 0) {
 		return (
 			<div className="text-center py-8 text-muted-foreground">
-				<p>{type === 'track' ? tMedia('no_tracks') : tMedia('no_artists')}</p>
+				<p>{type === 'track' ? tMedia('noTracks') : tMedia('noArtists')}</p>
 			</div>
 		);
 	}

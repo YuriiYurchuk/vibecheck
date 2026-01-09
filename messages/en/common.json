@@ -7,8 +7,8 @@
 	},
 	"time": {
 		"now": "just now",
-		"minutes_ago": "{count}m",
-		"hours_ago": "{count}h",
-		"days_ago": "{count}d"
+		"minutesAgo": "{count}m",
+		"hoursAgo": "{count}h",
+		"daysAgo": "{count}d"
 	}
 }

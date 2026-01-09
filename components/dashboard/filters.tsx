@@ -8,7 +8,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import type { Limit, Period } from '@/types/dashboard';
 
 type PeriodTogglesProps = {
@@ -72,11 +71,11 @@ export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 	return (
 		<Select value={isYearSelected ? value : ''} onValueChange={onChange}>
 			<SelectTrigger className="w-[180px] cursor-pointer">
-				<SelectValue placeholder={tFilters('last_365')} />
+				<SelectValue placeholder={tFilters('last365')} />
 			</SelectTrigger>
 			<SelectContent>
 				<SelectItem value="last_365" className="cursor-pointer">
-					{tFilters('last_365')}
+					{tFilters('last365')}
 				</SelectItem>
 				<div className="h-px bg-border my-1 mx-2 opacity-50" />
 				{years.map((year) => (
