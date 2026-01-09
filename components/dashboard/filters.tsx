@@ -61,10 +61,9 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 
 export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 	const tFilters = useTranslations('dashboard.shared.filters');
-	const isYearSelected = /^\d{4}$/.test(value);
+	const isYearSelected = /^\d{4}$/.test(value) || value === 'last_365';
 	const currentYear = new Date().getFullYear();
-	const startYear = fromYear;
-	const safeStartYear = Math.min(startYear, currentYear);
+	const safeStartYear = Math.min(fromYear, currentYear);
 	const years = Array.from(
 		{ length: currentYear - safeStartYear + 1 },
 		(_, i) => (currentYear - i).toString()
@@ -72,17 +71,16 @@ export const YearSelect = ({ value, onChange, fromYear }: YearSelectProps) => {
 
 	return (
 		<Select value={isYearSelected ? value : ''} onValueChange={onChange}>
-			<SelectTrigger
-				className={cn(
-					'w-24',
-					isYearSelected ? 'border-primary ring-1 ring-primary' : ''
-				)}
-			>
-				<SelectValue placeholder={tFilters('year')} />
+			<SelectTrigger className="w-[180px] cursor-pointer">
+				<SelectValue placeholder={tFilters('last_365')} />
 			</SelectTrigger>
 			<SelectContent>
+				<SelectItem value="last_365" className="cursor-pointer">
+					{tFilters('last_365')}
+				</SelectItem>
+				<div className="h-px bg-border my-1 mx-2 opacity-50" />
 				{years.map((year) => (
-					<SelectItem key={year} value={year}>
+					<SelectItem key={year} value={year} className="cursor-pointer">
 						{year}
 					</SelectItem>
 				))}

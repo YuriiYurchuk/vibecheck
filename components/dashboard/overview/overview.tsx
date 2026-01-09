@@ -33,7 +33,7 @@ export const Overview = ({ greetingKey }: DashboardContentProps) => {
 		period: Period;
 		limit: Limit;
 	}>({
-		storageKey: 'dashboard-preferences',
+		storageKey: 'dashboard-overview',
 		defaults: { period: 'week', limit: 10 },
 		deserializers: { limit: (val) => Number(val) as Limit },
 	});

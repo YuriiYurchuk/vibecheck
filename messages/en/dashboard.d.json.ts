@@ -44,14 +44,15 @@ declare const messages: {
 				"no_tracks": "No tracks to display",
 				"no_artists": "No artists to display"
 			}
-		}
+		},
+		"listening": {}
 	},
 	"shared": {
 		"filters": {
 			"day": "Day",
 			"week": "Week",
 			"month": "Month",
-			"year": "Year",
+			"last_365": "Last 365 Days",
 			"top": "Top {count}"
 		}
 	},
