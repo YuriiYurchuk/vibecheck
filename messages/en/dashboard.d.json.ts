@@ -46,8 +46,15 @@ declare const messages: {
 		},
 		"listening": {
 			"subtitle": "Your audio journey <highlight>{period}</highlight>",
-			"periodLast365": "over the last year",
-			"periodYear": "in {year}"
+			"periodLastYear": "over the last year",
+			"periodYear": "in {year}",
+			"calendar": {
+				"tooltipTracks": "{count, plural, one {# track} other {# tracks}}",
+				"less": "Less",
+				"more": "More",
+				"total": "{{count}} activities in {{year}}",
+				"totalLastYear": "{{count}} activities over the last year"
+			}
 		}
 	},
 	"shared": {
@@ -55,7 +62,7 @@ declare const messages: {
 			"day": "Day",
 			"week": "Week",
 			"month": "Month",
-			"last365": "Last 365 Days",
+			"lastYear": "Last year",
 			"top": "Top {count}"
 		}
 	},

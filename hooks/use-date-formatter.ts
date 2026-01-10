@@ -58,5 +58,5 @@ export const useDateFormatter = (timezone?: string) => {
 		[activeTimezone, currentLocale, tTime]
 	);
 
-	return { formatDate, formatRelative };
+	return { formatDate, formatRelative, rawLocale: currentLocale };
 };

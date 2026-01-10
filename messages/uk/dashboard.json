@@ -43,8 +43,15 @@
 		},
 		"listening": {
 			"subtitle": "Твоя музична подорож <highlight>{period}</highlight>",
-			"periodLast365": "за останній рік",
-			"periodYear": "у {year} році"
+			"periodLastYear": "за останній рік",
+			"periodYear": "у {year} році",
+			"calendar": {
+				"tooltipTracks": "{count, plural, one {# трек} few {# треки} many {# треків} other {# треків}}",
+				"less": "Менше",
+				"more": "Більше",
+				"total": "{{count}} прослуховувань у {{year}} році",
+				"totalLastYear": "{{count}} прослуховувань за останній рік"
+			}
 		}
 	},
 	"shared": {
@@ -52,7 +59,7 @@
 			"day": "День",
 			"week": "Тиждень",
 			"month": "Місяць",
-			"last365": "Останні 365 днів",
+			"lastYear": "Останній рік",
 			"top": "Топ {count}"
 		}
 	},
