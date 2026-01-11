@@ -4,7 +4,9 @@ import type { Day, Month } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { ActivityCalendar } from 'react-activity-calendar';
+import { Card, CardContent } from '@/components/ui/card';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { useCalendarSize } from '@/hooks/use-calendar-size';
 import { useDateFormatter } from '@/hooks/use-date-formatter';
 import { transformDataForCalendar } from '@/lib/helpers';
 import type { DashboardListeningResponse } from '@/types/dashboard';
@@ -24,6 +26,7 @@ export const ListeningCalendar = ({
 	const { formatDate, rawLocale } = useDateFormatter();
 	const activities = transformDataForCalendar(data);
 	const tCalendar = useTranslations('dashboard.pages.listening.calendar');
+	const calendarSize = useCalendarSize();
 
 	const totalLabel = useMemo(() => {
 		if (!activities.length) return tCalendar.raw('total');
@@ -82,31 +85,33 @@ export const ListeningCalendar = ({
 
 	return (
 		<TooltipProvider delayDuration={0}>
-			<div className="grid grid-cols-1 min-w-0">
-				<ActivityCalendar
-					data={activities}
-					loading={loading}
-					fontSize={12}
-					blockSize={12}
-					blockMargin={6}
-					blockRadius={8}
-					theme={themeColors}
-					labels={labels}
-					weekStart={1}
-					showTotalCount={true}
-					showWeekdayLabels
-					renderBlock={(block, activity) => (
-						<CalendarTooltip
-							block={
-								block as React.ReactElement<React.SVGProps<SVGRectElement>>
-							}
-							activity={activity}
-							loading={loading}
-							formatDate={formatDate}
-						/>
-					)}
-				/>
-			</div>
+			<Card className="py-3 md:py-6">
+				<CardContent className="grid grid-cols-1 min-w-0 px-3 md:px-6">
+					<ActivityCalendar
+						data={activities}
+						loading={loading}
+						fontSize={calendarSize.fontSize}
+						blockSize={calendarSize.blockSize}
+						blockMargin={calendarSize.blockMargin}
+						blockRadius={calendarSize.blockRadius}
+						theme={themeColors}
+						labels={labels}
+						weekStart={1}
+						showTotalCount={true}
+						showWeekdayLabels
+						renderBlock={(block, activity) => (
+							<CalendarTooltip
+								block={
+									block as React.ReactElement<React.SVGProps<SVGRectElement>>
+								}
+								activity={activity}
+								loading={loading}
+								formatDate={formatDate}
+							/>
+						)}
+					/>
+				</CardContent>
+			</Card>
 		</TooltipProvider>
 	);
 };

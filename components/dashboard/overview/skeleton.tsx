@@ -38,14 +38,11 @@ export const ChartSkeleton = () => (
 	<div className="rounded-xl border bg-card py-6">
 		<div className="px-6 mb-6">
 			<div className="flex items-center justify-between">
-				<div className="space-y-2">
-					<Skeleton className="h-5 w-40" />
-					<Skeleton className="h-4 w-32" />
-				</div>
+				<Skeleton className="h-5 w-40" />
 			</div>
 		</div>
 		<div className="px-6">
-			<div className="flex items-end justify-between gap-2 h-[200px]">
+			<div className="flex items-end justify-between gap-2 h-[300px]">
 				<Skeleton className="w-full rounded-t h-[45%]" />
 				<Skeleton className="w-full rounded-t h-[85%]" />
 				<Skeleton className="w-full rounded-t h-[60%]" />

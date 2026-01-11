@@ -23,14 +23,14 @@ body {
 @media (max-width: 480px) {
 	.react-activity-calendar__footer {
 		flex-direction: column;
-		align-items: flex-start;
 		gap: 12px;
-		margin-left: 0;
+		/* biome-ignore lint/complexity/noImportantStyles: Overriding library inline styles */
+		margin-left: 0 !important;
 	}
 
 	.react-activity-calendar__legend-colors {
-		margin-left: 0;
-		padding-top: 4px;
+		/* biome-ignore lint/complexity/noImportantStyles: Overriding library inline styles */
+		margin-left: 0 !important;
 	}
 }
 
