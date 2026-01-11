@@ -54,6 +54,10 @@ declare const messages: {
 				"more": "More",
 				"total": "{{count}} activities in {{year}}",
 				"totalLastYear": "{{count}} activities over the last year"
+			},
+			"charts": {
+				"title": "Hourly Activity",
+				"description": "Activity distribution by time of day"
 			}
 		}
 	},
