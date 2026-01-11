@@ -1,4 +1,4 @@
-import { chunkArray, delay } from '@/lib/helpers';
+import { chunkArray, delay } from '@/lib/utils';
 import type { ArtistBasicInfo, SpotifyArtistsResponse } from '@/types/spotify';
 import { spotifyFetch } from './fetch';
 
