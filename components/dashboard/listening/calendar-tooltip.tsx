@@ -10,18 +10,15 @@ import {
 type CalendarTooltipProps = {
 	block: React.ReactElement<React.SVGProps<SVGRectElement>>;
 	activity: Activity;
-	loading?: boolean;
 	formatDate: (date: string | Date, format: string) => string;
 };
 
 export const CalendarTooltip = ({
 	block,
 	activity,
-	loading,
 	formatDate,
 }: CalendarTooltipProps) => {
 	const tCalendar = useTranslations('dashboard.pages.listening.calendar');
-	if (loading) return block;
 
 	const dateLabel = formatDate(activity.date, 'd MMMM');
 

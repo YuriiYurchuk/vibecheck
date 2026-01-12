@@ -16,13 +16,9 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 type ListeningCalendarProps = {
 	data: DashboardListeningResponse['yearCalendar'];
-	loading?: boolean;
 };
 
-export const ListeningCalendar = ({
-	data,
-	loading,
-}: ListeningCalendarProps) => {
+export const ListeningCalendar = ({ data }: ListeningCalendarProps) => {
 	const { formatDate, rawLocale } = useDateFormatter();
 	const activities = transformDataForCalendar(data);
 	const tCalendar = useTranslations('dashboard.pages.listening.calendar');
@@ -89,7 +85,6 @@ export const ListeningCalendar = ({
 				<CardContent className="grid grid-cols-1 min-w-0 px-3 md:px-6">
 					<ActivityCalendar
 						data={activities}
-						loading={loading}
 						fontSize={calendarSize.fontSize}
 						blockSize={calendarSize.blockSize}
 						blockMargin={calendarSize.blockMargin}
@@ -105,7 +100,6 @@ export const ListeningCalendar = ({
 									block as React.ReactElement<React.SVGProps<SVGRectElement>>
 								}
 								activity={activity}
-								loading={loading}
 								formatDate={formatDate}
 							/>
 						)}

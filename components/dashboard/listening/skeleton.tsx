@@ -12,6 +12,52 @@ export const HeaderSkeleton = () => (
 	</div>
 );
 
+export const CalendarSkeleton = () => (
+	<div className="grid grid-cols-1 min-w-0 bg-card rounded-xl overflow-y-auto p-6">
+		<div className="inline-block min-w-full">
+			<div className="space-y-2">
+				<div className="flex justify-between gap-3 pl-7">
+					{Array.from({ length: 12 }).map((_, i) => (
+						<Skeleton key={i} className="h-3 w-10 shrink-0" />
+					))}
+				</div>
+				<div className="space-y-1.5">
+					{Array.from({ length: 7 }).map((_, rowIndex) => (
+						<div key={rowIndex} className="flex items-center gap-1.5">
+							<Skeleton className="h-3 w-5 shrink-0" />
+							<div className="flex gap-1.5">
+								{Array.from({ length: 53 }).map((_, colIndex) => (
+									<Skeleton
+										key={colIndex}
+										className="shrink-0 rounded"
+										style={{ width: '12px', height: '12px' }}
+									/>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+				<div className="flex items-center justify-between pt-2 flex-wrap gap-2">
+					<Skeleton className="h-3 w-48" />
+					<div className="flex items-center gap-2">
+						<Skeleton className="h-3 w-16" />
+						<div className="flex gap-1">
+							{Array.from({ length: 5 }).map((_, i) => (
+								<Skeleton
+									key={i}
+									className="rounded"
+									style={{ width: '12px', height: '12px' }}
+								/>
+							))}
+						</div>
+						<Skeleton className="h-3 w-16" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+);
+
 export const ChartSkeleton = () => (
 	<div className="rounded-xl border bg-card">
 		<div className="p-6 space-y-1.5">
@@ -43,6 +89,9 @@ export const ChartSkeleton = () => (
 
 export const ContentSkeleton = () => (
 	<div className="space-y-6">
+		<div className="mx-auto w-fit">
+			<CalendarSkeleton />
+		</div>
 		<ChartSkeleton />
 	</div>
 );
