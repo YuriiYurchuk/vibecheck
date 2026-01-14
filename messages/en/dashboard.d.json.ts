@@ -32,7 +32,8 @@ declare const messages: {
 				"totalHours": "Total Hours",
 				"totalPlays": "Total Plays",
 				"uniqueArtists": "Unique Artists",
-				"uniqueTracks": "Unique Tracks"
+				"uniqueTracks": "Unique Tracks",
+				"hoursSuffix": "h"
 			},
 			"charts": {
 				"weeklyActivity": "Weekly Activity"

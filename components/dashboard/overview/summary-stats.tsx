@@ -19,7 +19,7 @@ export const SummaryStatsGrid = ({ summary }: SummaryStatsGridProps) => {
 			icon: <Clock className="w-5 h-5 text-primary" />,
 			title: tStats('totalHours'),
 			value: summary.totalHours,
-			suffix: 'h',
+			suffix: tStats('hoursSuffix'),
 		},
 		{
 			id: 'total-plays',

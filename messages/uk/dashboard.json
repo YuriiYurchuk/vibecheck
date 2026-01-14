@@ -29,7 +29,8 @@
 				"totalHours": "Годин прослухано",
 				"totalPlays": "Прослуховувань",
 				"uniqueArtists": "Унікальних виконавців",
-				"uniqueTracks": "Унікальних треків"
+				"uniqueTracks": "Унікальних треків",
+				"hoursSuffix": "год"
 			},
 			"charts": {
 				"weeklyActivity": "Активність за тиждень"
