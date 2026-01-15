@@ -81,14 +81,14 @@ export const Listening = () => {
 		<div className="space-y-6 w-full overflow-hidden">
 			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 				<FadeIn delay={100}>
-					<p className="text-muted-foreground mt-1 text-lg">
-						{tListening.rich('subtitle', {
+					<h2 className="text-muted-foreground text-xl font-semibold">
+						{tListening.rich('title', {
 							period: displayPeriod,
 							highlight: (chunks) => (
 								<span className="text-primary font-medium">{chunks}</span>
 							),
 						})}
-					</p>
+					</h2>
 				</FadeIn>
 				<div className="flex items-center gap-2">
 					<Calendar className="size-4 text-primary shrink-0" />

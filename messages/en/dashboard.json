@@ -43,7 +43,7 @@
 			}
 		},
 		"listening": {
-			"subtitle": "Your audio journey <highlight>{period}</highlight>",
+			"title": "Your audio journey <highlight>{period}</highlight>",
 			"periodLastYear": "over the last year",
 			"periodYear": "in {year}",
 			"calendar": {
@@ -57,6 +57,23 @@
 				"title": "Hourly Activity",
 				"description": "Activity distribution by time of day"
 			}
+		},
+		"mood": {
+			"title": "How your musical mood has evolved over time",
+			"stats": {
+				"avgTempo": "Avg Tempo",
+				"avgLoudness": "Avg Loudness",
+				"instrumental": "Instrumental",
+				"liveRecordings": "Live Recordings",
+				"bpmSuffix": "BPM",
+				"dbSuffix": "dB"
+			},
+			"tooltips": {
+				"avgTempo": "Average tempo in beats per minute. 120+ is energetic, 60-90 is chill.",
+				"avgLoudness": "Overall loudness. Closer to 0 dB is louder, closer to -60 dB is quieter.",
+				"instrumental": "Likelihood that the track contains no vocals.",
+				"liveRecordings": "Detects the presence of an audience in the recording."
+			}
 		}
 	},
 	"shared": {
@@ -65,7 +82,15 @@
 			"week": "Week",
 			"month": "Month",
 			"lastYear": "Last year",
-			"top": "Top {count}"
+			"top": "Top {count}",
+			"modes": {
+				"rolling": "Rolling",
+				"calendar": "Calendar",
+				"tooltips": {
+					"calendar": "Data from the 1st of the current month until today",
+					"rolling": "Data for the last 24h, 7 days, or 30 days (depending on filter)"
+				}
+			}
 		}
 	},
 	"apiErrors": {

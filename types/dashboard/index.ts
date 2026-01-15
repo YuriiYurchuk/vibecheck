@@ -126,3 +126,4 @@ export type DashboardInsightsResponse = {
 
 export type Period = 'day' | 'week' | 'month';
 export type Limit = 10 | 25;
+export type Mode = 'rolling' | 'calendar';
