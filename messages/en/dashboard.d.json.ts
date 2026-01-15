@@ -90,8 +90,8 @@ declare const messages: {
 				"rolling": "Rolling",
 				"calendar": "Calendar",
 				"tooltips": {
-					"calendar": "Data from the 1st of the current month until today",
-					"rolling": "Data for the last 24h, 7 days, or 30 days (depending on filter)"
+					"rolling": "Data for the selected period (last 24h, 7 days, or 30 days).",
+					"calendar": "Data strictly from the 1st of the current month until today."
 				}
 			}
 		}
