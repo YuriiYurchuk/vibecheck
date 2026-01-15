@@ -8,11 +8,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import type { Limit, Period } from '@/types/dashboard';
+import type { Limit, Mode, Period } from '@/types/dashboard';
 
 type PeriodTogglesProps = {
 	value: string;
 	onChange: (value: Period) => void;
+	disabled?: boolean;
 };
 
 type YearSelectProps = {
@@ -26,7 +27,16 @@ type LimitSelectProps = {
 	onChange: (value: Limit) => void;
 };
 
-export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
+type ModeToggleProps = {
+	mode: Mode;
+	onChange: (mode: Mode) => void;
+};
+
+export const PeriodToggles = ({
+	value,
+	onChange,
+	disabled,
+}: PeriodTogglesProps) => {
 	const tFilters = useTranslations('dashboard.shared.filters');
 	return (
 		<ButtonGroup className="p-1 border border-border/50 rounded-lg">
@@ -35,6 +45,7 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				onClick={() => onChange('day')}
 				size="sm"
 				className="cursor-pointer"
+				disabled={disabled}
 			>
 				{tFilters('day')}
 			</Button>
@@ -43,6 +54,7 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				onClick={() => onChange('week')}
 				size="sm"
 				className="cursor-pointer"
+				disabled={disabled}
 			>
 				{tFilters('week')}
 			</Button>
@@ -51,6 +63,7 @@ export const PeriodToggles = ({ value, onChange }: PeriodTogglesProps) => {
 				onClick={() => onChange('month')}
 				size="sm"
 				className="cursor-pointer"
+				disabled={disabled}
 			>
 				{tFilters('month')}
 			</Button>
@@ -112,5 +125,30 @@ export const LimitSelect = ({ value, onChange }: LimitSelectProps) => {
 				))}
 			</SelectContent>
 		</Select>
+	);
+};
+
+export const ModeToggle = ({ mode, onChange }: ModeToggleProps) => {
+	const tModes = useTranslations('dashboard.shared.filters.modes');
+
+	return (
+		<ButtonGroup className="p-1 border border-border/50 rounded-lg">
+			<Button
+				variant={mode === 'calendar' ? 'default' : 'ghost'}
+				onClick={() => onChange('calendar')}
+				size="sm"
+				className="cursor-pointer"
+			>
+				{tModes('calendar')}
+			</Button>
+			<Button
+				variant={mode === 'rolling' ? 'default' : 'ghost'}
+				onClick={() => onChange('rolling')}
+				size="sm"
+				className="cursor-pointer"
+			>
+				{tModes('rolling')}
+			</Button>
+		</ButtonGroup>
 	);
 };

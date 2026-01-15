@@ -11,11 +11,11 @@ type FilterConfig<T extends Record<string, string | number>> = {
 	}>;
 };
 
-export function useUrlFilters<T extends Record<string, string | number>>({
+export const useUrlFilters = <T extends Record<string, string | number>>({
 	storageKey,
 	defaults,
 	deserializers = {},
-}: FilterConfig<T>) {
+}: FilterConfig<T>) => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -131,9 +131,23 @@ export function useUrlFilters<T extends Record<string, string | number>>({
 		[searchParams, pathname, router]
 	);
 
+	const updateMultipleFilters = useCallback(
+		(updates: Partial<T>) => {
+			setFilters((prev) => ({ ...prev, ...updates }));
+
+			const params = new URLSearchParams(searchParams.toString());
+			Object.entries(updates).forEach(([key, value]) => {
+				params.set(key, String(value));
+			});
+			router.push(`${pathname}?${params.toString()}`, { scroll: false });
+		},
+		[searchParams, pathname, router]
+	);
+
 	return {
 		filters,
 		updateFilter,
+		updateMultipleFilters,
 		isReady: isInitialized,
 	};
-}
+};
