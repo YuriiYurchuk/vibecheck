@@ -90,14 +90,14 @@ export const Listening = () => {
 						})}
 					</h2>
 				</FadeIn>
-				<div className="flex items-center gap-2">
+				<FadeIn delay={200} className="flex items-center gap-2">
 					<Calendar className="size-4 text-primary shrink-0" />
 					<YearSelect
 						value={filters.year}
 						onChange={(val) => updateFilter('year', val)}
 						fromYear={startYear}
 					/>
-				</div>
+				</FadeIn>
 			</div>
 			{renderContent()}
 		</div>
