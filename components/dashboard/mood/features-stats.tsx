@@ -48,7 +48,7 @@ export const FeaturesStats = ({ data }: FeaturesStatsProps) => {
 	];
 
 	return (
-		<div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+		<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
 			{statCards.map((stat, index) => (
 				<FadeIn key={stat.id} delay={index * 100}>
 					<StatCard
