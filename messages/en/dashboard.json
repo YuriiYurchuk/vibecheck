@@ -73,6 +73,19 @@
 				"avgLoudness": "Overall loudness. Closer to 0 dB is louder, closer to -60 dB is quieter.",
 				"instrumental": "Likelihood that the track contains no vocals.",
 				"liveRecordings": "Detects the presence of an audience in the recording."
+			},
+			"personality": {
+				"title": "Your Musical Vibe",
+				"noData": "No data to analyze yet",
+				"noDataHint": "Listen to some music to see your vibe!",
+				"highEnergy": "High-energy vibes",
+				"lowEnergy": "Chill & relaxed",
+				"mediumEnergy": "Balanced energy",
+				"positive": "Uplifting mood",
+				"melancholic": "Melancholic soul",
+				"balanced": "Emotionally balanced",
+				"majorLean": "Bright & major",
+				"minorLean": "Deep & minor"
 			}
 		}
 	},
