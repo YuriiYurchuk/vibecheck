@@ -89,6 +89,16 @@ declare const messages: {
 				"balanced": "Emotionally balanced",
 				"majorLean": "Bright & major",
 				"minorLean": "Deep & minor"
+			},
+			"radar": {
+				"title": "Audio Features Profile",
+				"tooltipLabel": "Vibe Profile",
+				"energy": "Energy",
+				"dance": "Dance",
+				"valence": "Valence",
+				"acoustic": "Acoustic",
+				"speech": "Speech",
+				"live": "Live"
 			}
 		}
 	},
