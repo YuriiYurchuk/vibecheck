@@ -91,7 +91,7 @@ export const MoodPersonality = ({ features, mode }: MoodPersonalityProps) => {
 				<Sparkles className="size-20 sm:size-32" />
 			</div>
 			<CardHeader className="relative z-10">
-				<CardTitle className="text-base sm:text-lg font-bold">
+				<CardTitle className="text-lg font-bold">
 					<span>{tPersonality('title')}</span>
 				</CardTitle>
 			</CardHeader>
