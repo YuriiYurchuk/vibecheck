@@ -143,7 +143,7 @@ export const AudioFeaturesRadar = ({ moodData }: AudioFeaturesRadarProps) => {
 				<CardTitle className="text-lg font-medium">{tRadar('title')}</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<ResponsiveContainer width="100%" height={250}>
+				<ResponsiveContainer width="100%" height={300}>
 					<RadarChart
 						cx="50%"
 						cy="50%"
