@@ -99,6 +99,12 @@ declare const messages: {
 				"acoustic": "Acoustic",
 				"speech": "Speech",
 				"live": "Live"
+			},
+			"modality": {
+				"title": "Major vs Minor",
+				"major": "Major",
+				"minor": "Minor",
+				"noData": "No Data"
 			}
 		}
 	},
