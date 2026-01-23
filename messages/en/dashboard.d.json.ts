@@ -105,6 +105,9 @@ declare const messages: {
 				"major": "Major",
 				"minor": "Minor",
 				"noData": "No Data"
+			},
+			"keys": {
+				"title": "Key Distribution"
 			}
 		}
 	},
