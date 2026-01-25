@@ -104,7 +104,16 @@
 				"noData": "No Data"
 			},
 			"keys": {
-				"title": "Key Distribution"
+				"title": "Musical Keys"
+			},
+			"tempo": {
+				"title": "Musical Pulse",
+				"ranges": {
+					"slow": "Slow",
+					"moderate": "Moderate",
+					"fast": "Fast",
+					"veryFast": "Very Fast"
+				}
 			}
 		}
 	},
