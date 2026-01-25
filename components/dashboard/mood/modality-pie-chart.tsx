@@ -40,8 +40,6 @@ export const ModalityPieChart = ({ data }: ModalityPieChartProps) => {
 							<Pie
 								data={displayData}
 								dataKey="value"
-								cx="50%"
-								cy="50%"
 								innerRadius="60%"
 								outerRadius="80%"
 								startAngle={90}

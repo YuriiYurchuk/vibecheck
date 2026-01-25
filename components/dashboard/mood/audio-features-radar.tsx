@@ -144,17 +144,11 @@ export const AudioFeaturesRadar = ({ moodData }: AudioFeaturesRadarProps) => {
 			</CardHeader>
 			<CardContent>
 				<ResponsiveContainer width="100%" height={300}>
-					<RadarChart
-						cx="50%"
-						cy="50%"
-						outerRadius="80%"
-						data={chartData}
-						margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-					>
+					<RadarChart outerRadius="80%" data={chartData}>
 						<PolarGrid
 							gridType="polygon"
 							stroke="var(--border)"
-							strokeOpacity={0.6}
+							strokeOpacity={0.5}
 						/>
 						<PolarAngleAxis
 							dataKey="feature"

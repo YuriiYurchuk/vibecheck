@@ -9,6 +9,13 @@ import {
 	XAxis,
 	YAxis,
 } from 'recharts';
+import {
+	ChartGradient,
+	commonAxisProps,
+	commonGridProps,
+	commonTooltipCursor,
+	verticalBarProps,
+} from '@/components/chart-config';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartTooltip } from '@/components/ui/chart-tooltip';
 import type { DashboardMoodResponse } from '@/types/dashboard';
@@ -35,41 +42,21 @@ export const KeysDistributionChart = ({ data }: KeysDistributionChartProps) => {
 								margin={{ top: 20, right: 0, left: -20, bottom: 0 }}
 							>
 								<defs>
-									<linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop
-											offset="0%"
-											stopColor="var(--color-chart-3)"
-											stopOpacity={1}
-										/>
-										<stop
-											offset="100%"
-											stopColor="var(--color-chart-1)"
-											stopOpacity={0.8}
-										/>
-									</linearGradient>
+									<ChartGradient
+										id="keysBarGradient"
+										colorStart="var(--chart-3)"
+										colorEnd="var(--chart-1)"
+									/>
 								</defs>
-								<CartesianGrid
-									strokeDasharray="3 3"
-									stroke="var(--color-muted-foreground)"
-									strokeOpacity={0.5}
-									vertical={false}
-								/>
+								<CartesianGrid {...commonGridProps} vertical={false} />
 								<XAxis
 									dataKey="key"
-									stroke="var(--color-muted-foreground)"
-									axisLine={false}
-									tickLine={false}
+									{...commonAxisProps}
 									tickFormatter={formatKeyLabel}
-									interval={0}
-									dy={10}
 								/>
-								<YAxis
-									axisLine={false}
-									tickLine={false}
-									allowDecimals={false}
-								/>
+								<YAxis {...commonAxisProps} allowDecimals={false} />
 								<Tooltip
-									cursor={{ fill: 'var(--muted)', opacity: 0.3, radius: 4 }}
+									cursor={commonTooltipCursor}
 									content={
 										<ChartTooltip
 											labelKey="key"
@@ -80,9 +67,8 @@ export const KeysDistributionChart = ({ data }: KeysDistributionChartProps) => {
 								/>
 								<Bar
 									dataKey="count"
-									fill="url(#barGradient)"
-									radius={[8, 8, 0, 0]}
-									maxBarSize={60}
+									fill="url(#keysBarGradient)"
+									{...verticalBarProps}
 								/>
 							</BarChart>
 						</ResponsiveContainer>

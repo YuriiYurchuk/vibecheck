@@ -9,6 +9,13 @@ import {
 	XAxis,
 	YAxis,
 } from 'recharts';
+import {
+	ChartGradient,
+	commonAxisProps,
+	commonGridProps,
+	commonTooltipCursor,
+	horizontalBarProps,
+} from '@/components/chart-config';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartTooltip } from '@/components/ui/chart-tooltip';
 import type { DashboardMoodResponse } from '@/types/dashboard';
@@ -51,41 +58,23 @@ export const TempoChart = ({ data }: TempoChartProps) => {
 						layout="vertical"
 					>
 						<defs>
-							<linearGradient id="tempoGradient" x1="0" y1="0" x2="1" y2="0">
-								<stop
-									offset="0%"
-									stopColor="var(--color-chart-4)"
-									stopOpacity={1}
-								/>
-								<stop
-									offset="100%"
-									stopColor="var(--color-chart-3)"
-									stopOpacity={0.8}
-								/>
-							</linearGradient>
+							<ChartGradient
+								id="tempoBarGradient"
+								colorStart="var(--chart-5)"
+								colorEnd="var(--chart-4)"
+								orientation="horizontal"
+							/>
 						</defs>
-						<CartesianGrid
-							strokeDasharray="3 3"
-							stroke="var(--color-muted-foreground)"
-							strokeOpacity={0.5}
-							horizontal={false}
-						/>
-						<XAxis
-							type="number"
-							stroke="var(--color-muted-foreground)"
-							axisLine={false}
-							tickLine={false}
-						/>
+						<CartesianGrid {...commonGridProps} horizontal={false} />
+						<XAxis type="number" {...commonAxisProps} />
 						<YAxis
 							dataKey="label"
 							type="category"
-							stroke="var(--color-muted-foreground)"
-							axisLine={false}
-							tickLine={false}
+							{...commonAxisProps}
 							width={100}
 						/>
 						<Tooltip
-							cursor={{ fill: 'var(--color-muted)', opacity: 1, radius: 4 }}
+							cursor={commonTooltipCursor}
 							content={
 								<ChartTooltip
 									labelKey="label"
@@ -96,9 +85,8 @@ export const TempoChart = ({ data }: TempoChartProps) => {
 						/>
 						<Bar
 							dataKey="count"
-							fill="url(#tempoGradient)"
-							radius={[0, 8, 8, 0]}
-							maxBarSize={80}
+							fill="url(#tempoBarGradient)"
+							{...horizontalBarProps}
 						/>
 					</BarChart>
 				</ResponsiveContainer>

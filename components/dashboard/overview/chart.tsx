@@ -9,6 +9,13 @@ import {
 	XAxis,
 	YAxis,
 } from 'recharts';
+import {
+	ChartGradient,
+	commonAxisProps,
+	commonGridProps,
+	commonTooltipCursor,
+	verticalBarProps,
+} from '@/components/chart-config';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartTooltip } from '@/components/ui/chart-tooltip';
 import { useDateFormatter } from '@/hooks/use-date-formatter';
@@ -36,63 +43,39 @@ export const OverviewChart = ({ data, timezone }: OverviewChartProps) => {
 					{tChart('weeklyActivity')}
 				</CardTitle>
 			</CardHeader>
-			<CardContent className="px-6 pb-6">
-				<ResponsiveContainer width="100%" height={350}>
+			<CardContent>
+				<ResponsiveContainer width="100%" height={300}>
 					<BarChart
 						data={chartData}
 						margin={{ top: 20, right: 0, left: -20, bottom: 0 }}
 					>
 						<defs>
-							<linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-								<stop
-									offset="0%"
-									stopColor="var(--color-chart-1)"
-									stopOpacity={1}
-								/>
-								<stop
-									offset="100%"
-									stopColor="var(--color-chart-2)"
-									stopOpacity={0.8}
-								/>
-							</linearGradient>
+							<ChartGradient
+								id="weeklyBarGradient"
+								colorStart="var(--chart-1)"
+								colorEnd="var(--chart-2)"
+							/>
 						</defs>
-						<CartesianGrid
-							strokeDasharray="3 3"
-							stroke="var(--color-border)"
-							strokeOpacity={0.5}
-							vertical={false}
-						/>
-						<XAxis
-							dataKey="date"
-							stroke="var(--color-muted-foreground)"
-							fontSize={12}
-							tickLine={false}
-							axisLine={false}
-							dy={10}
-						/>
+						<CartesianGrid {...commonGridProps} vertical={false} />
+						<XAxis dataKey="date" {...commonAxisProps} />
 						<YAxis
-							stroke="var(--color-muted-foreground)"
-							fontSize={12}
-							tickLine={false}
-							axisLine={false}
-							dx={-10}
+							{...commonAxisProps}
 							tickFormatter={(value) => value.toLocaleString()}
 						/>
 						<Tooltip
+							cursor={commonTooltipCursor}
 							content={
 								<ChartTooltip
 									icon={Headphones}
 									labelKey="fullDate"
-									color="var(--color-chart-1)"
+									color="var(--chart-1)"
 								/>
 							}
-							cursor={{ fill: 'var(--color-muted)', opacity: 0.3, radius: 4 }}
 						/>
 						<Bar
 							dataKey="plays"
-							fill="url(#barGradient)"
-							radius={[8, 8, 0, 0]}
-							maxBarSize={60}
+							fill="url(#weeklyBarGradient)"
+							{...verticalBarProps}
 						/>
 					</BarChart>
 				</ResponsiveContainer>
