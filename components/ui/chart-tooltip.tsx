@@ -51,7 +51,7 @@ export const ChartTooltip = <
 							{valueLabel || (valueLabelKey && String(item[valueLabelKey]))}
 						</span>
 					)}
-					<span className="text-xl font-bold text-foreground font-mono tracking-tight">
+					<span className="text-sm font-bold text-foreground tracking-tight">
 						{payload[0].value?.toLocaleString()}
 					</span>
 				</div>

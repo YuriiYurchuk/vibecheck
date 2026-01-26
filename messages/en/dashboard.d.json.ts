@@ -117,6 +117,27 @@ declare const messages: {
 					"fast": "Fast",
 					"veryFast": "Very Fast"
 				}
+			},
+			"scatter": {
+				"title": "Mood Quadrants",
+				"description": "Your music taste mapped by energy and mood.",
+				"axes": {
+					"sad": "Sad",
+					"happy": "Happy",
+					"calm": "Calm",
+					"intense": "Intense"
+				},
+				"legend": {
+					"happyIntense": "Happy / Intense",
+					"angryIntense": "Angry / Intense",
+					"happyCalm": "Happy / Calm",
+					"sadCalm": "Sad / Calm"
+				},
+				"tooltip": {
+					"valence": "Valence",
+					"energy": "Energy",
+					"plays": "{count, plural, =0 {No plays} one {# play} other {# plays}}"
+				}
 			}
 		}
 	},
