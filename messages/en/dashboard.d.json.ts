@@ -138,7 +138,8 @@ declare const messages: {
 					"energy": "Energy",
 					"plays": "{count, plural, =0 {No plays} one {# play} other {# plays}}"
 				}
-			}
+			},
+			"footer": "Statistics based on analysis of {count} out of {total} tracks ({percent}% coverage)"
 		}
 	},
 	"shared": {
