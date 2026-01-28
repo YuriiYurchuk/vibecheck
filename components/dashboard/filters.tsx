@@ -1,4 +1,5 @@
-import { Info } from 'lucide-react';
+import { subMonths } from 'date-fns';
+import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
@@ -15,6 +16,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useDateFormatter } from '@/hooks/use-date-formatter';
 import type { Limit, Mode, Period } from '@/types/dashboard';
 
 type PeriodTogglesProps = {
@@ -37,6 +39,12 @@ type LimitSelectProps = {
 type ModeToggleProps = {
 	mode: Mode;
 	onChange: (mode: Mode) => void;
+};
+
+type MonthNavigatorProps = {
+	value: number;
+	onChange: (value: number) => void;
+	maxMonths?: number;
 };
 
 export const PeriodToggles = ({
@@ -140,7 +148,6 @@ export const ModeToggle = ({ mode, onChange }: ModeToggleProps) => {
 
 	return (
 		<div className="flex items-center gap-2">
-			{/* Група кнопок */}
 			<ButtonGroup className="p-1 border border-border/50 rounded-lg bg-background">
 				<Button
 					variant={mode === 'rolling' ? 'secondary' : 'ghost'}
@@ -150,7 +157,6 @@ export const ModeToggle = ({ mode, onChange }: ModeToggleProps) => {
 				>
 					{tModes('rolling')}
 				</Button>
-
 				<Button
 					variant={mode === 'calendar' ? 'secondary' : 'ghost'}
 					onClick={() => onChange('calendar')}
@@ -160,8 +166,6 @@ export const ModeToggle = ({ mode, onChange }: ModeToggleProps) => {
 					{tModes('calendar')}
 				</Button>
 			</ButtonGroup>
-
-			{/* Окрема іконка з поясненням */}
 			<TooltipProvider>
 				<Tooltip delayDuration={300}>
 					<TooltipTrigger asChild>
@@ -184,6 +188,68 @@ export const ModeToggle = ({ mode, onChange }: ModeToggleProps) => {
 					</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>
+		</div>
+	);
+};
+
+export const MonthNavigator = ({
+	value,
+	onChange,
+	maxMonths = 12,
+}: MonthNavigatorProps) => {
+	const tFilters = useTranslations('dashboard.shared.filters');
+	const { formatDate } = useDateFormatter();
+	const currentDate = new Date();
+	const targetDate = subMonths(currentDate, value);
+
+	const handlePrevious = () => {
+		if (value < maxMonths) onChange(value + 1);
+	};
+
+	const handleNext = () => {
+		if (value > 0) onChange(value - 1);
+	};
+
+	let title: string;
+	let subtitle: string;
+
+	if (value === 0) {
+		title = tFilters('thisMonth');
+		subtitle = tFilters('currentMonth');
+	} else {
+		const rawTitle = formatDate(targetDate, 'MMMM yyyy');
+		title = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+		subtitle = tFilters('monthsAgo', { count: value });
+	}
+
+	return (
+		<div className="flex items-center justify-between gap-3 select-none">
+			<Button
+				variant="outline"
+				size="icon"
+				onClick={handlePrevious}
+				disabled={value >= maxMonths}
+				className="size-10 rounded-xl bg-card/50 border-white/10 hover:bg-white/10 transition-colors"
+			>
+				<ChevronLeft className="size-5 text-muted-foreground" />
+			</Button>
+			<div className="flex flex-col items-center justify-center min-w-[140px] md:min-w-[180px] text-center space-y-0.5">
+				<span className="text-lg md:text-xl font-bold tracking-tight text-foreground leading-none">
+					{title}
+				</span>
+				<span className="text-xs font-medium text-muted-foreground">
+					{subtitle}
+				</span>
+			</div>
+			<Button
+				variant="outline"
+				size="icon"
+				onClick={handleNext}
+				disabled={value === 0}
+				className="size-10 rounded-xl bg-card/50 border-white/10 hover:bg-white/10 transition-colors"
+			>
+				<ChevronRight className="size-5 text-muted-foreground" />
+			</Button>
 		</div>
 	);
 };

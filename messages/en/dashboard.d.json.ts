@@ -156,7 +156,10 @@ declare const messages: {
 					"rolling": "Data for the selected period (last 24h, 7 days, or 30 days).",
 					"calendar": "Data strictly from the 1st of the current month until today."
 				}
-			}
+			},
+			"thisMonth": "This Month",
+			"currentMonth": "Current month",
+			"monthsAgo": "{count, plural, one {# month ago} other {# months ago}}"
 		}
 	},
 	"apiErrors": {
