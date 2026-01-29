@@ -223,32 +223,30 @@ export const MonthNavigator = ({
 	}
 
 	return (
-		<div className="flex items-center justify-between gap-3 select-none">
+		<div className="w-fit flex items-center p-1 border border-border/50 rounded-lg bg-background">
 			<Button
-				variant="outline"
-				size="icon"
+				variant="ghost"
+				size="sm"
 				onClick={handlePrevious}
 				disabled={value >= maxMonths}
-				className="size-10 rounded-xl bg-card/50 border-white/10 hover:bg-white/10 transition-colors"
+				className="h-8 w-8 px-0 shrink-0 text-muted-foreground hover:text-foreground"
 			>
-				<ChevronLeft className="size-5 text-muted-foreground" />
+				<ChevronLeft className="size-4" />
 			</Button>
-			<div className="flex flex-col items-center justify-center min-w-[140px] md:min-w-[180px] text-center space-y-0.5">
-				<span className="text-lg md:text-xl font-bold tracking-tight text-foreground leading-none">
-					{title}
-				</span>
-				<span className="text-xs font-medium text-muted-foreground">
+			<div className="flex flex-col items-center justify-center px-3 min-w-[110px] select-none">
+				<span className="text-sm font-medium leading-none">{title}</span>
+				<span className="text-[10px] text-muted-foreground mt-0.5 leading-none">
 					{subtitle}
 				</span>
 			</div>
 			<Button
-				variant="outline"
-				size="icon"
+				variant="ghost"
+				size="sm"
 				onClick={handleNext}
 				disabled={value === 0}
-				className="size-10 rounded-xl bg-card/50 border-white/10 hover:bg-white/10 transition-colors"
+				className="h-8 w-8 px-0 shrink-0 text-muted-foreground hover:text-foreground"
 			>
-				<ChevronRight className="size-5 text-muted-foreground" />
+				<ChevronRight className="size-4" />
 			</Button>
 		</div>
 	);
