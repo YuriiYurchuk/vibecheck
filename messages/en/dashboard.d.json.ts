@@ -140,6 +140,20 @@ declare const messages: {
 				}
 			},
 			"footer": "Statistics based on analysis of {count} out of {total} tracks ({percent}% coverage)"
+		},
+		"insights": {
+			"title": "Your Monthly Recap",
+			"subtitle": "A complete breakdown of your listening habits for this period",
+			"stats": {
+				"totalTime": "Total Listening Time",
+				"vsLastMonth": "vs last month",
+				"h": "h",
+				"m": "m",
+				"mostActiveDay": "Most Active Day",
+				"peakTime": "Peak Listening Time",
+				"plays": "{count, plural, one {# play} other {# plays}}",
+				"noData": "No data"
+			}
 		}
 	},
 	"shared": {
@@ -160,6 +174,15 @@ declare const messages: {
 			"thisMonth": "This Month",
 			"currentMonth": "Current month",
 			"monthsAgo": "{count, plural, one {# month ago} other {# months ago}}"
+		},
+		"days": {
+			"monday": "Monday",
+			"tuesday": "Tuesday",
+			"wednesday": "Wednesday",
+			"thursday": "Thursday",
+			"friday": "Friday",
+			"saturday": "Saturday",
+			"sunday": "Sunday"
 		}
 	},
 	"apiErrors": {
