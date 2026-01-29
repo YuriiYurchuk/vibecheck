@@ -1,6 +1,6 @@
 'use client';
 
-import { Info, TrendingDown, TrendingUp } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import {
@@ -15,12 +15,7 @@ type StatCardProps = {
 	title: string;
 	value: number | string;
 	suffix?: string;
-	description?: string;
 	tooltip?: string;
-	trend?: {
-		value: number;
-		isIncrease: boolean;
-	};
 	className?: string;
 };
 
@@ -29,9 +24,7 @@ export const StatCard = ({
 	title,
 	value,
 	suffix,
-	description,
 	tooltip,
-	trend,
 	className,
 }: StatCardProps) => {
 	return (
@@ -68,27 +61,6 @@ export const StatCard = ({
 							</span>
 						)}
 					</p>
-					{description && (
-						<p className="text-sm text-muted-foreground">{description}</p>
-					)}
-					{trend && (
-						<div className="flex items-center gap-1">
-							{trend.isIncrease ? (
-								<TrendingUp className="size-4 text-green-500" />
-							) : (
-								<TrendingDown className="size-4 text-red-500" />
-							)}
-							<span
-								className={cn(
-									'text-sm font-medium',
-									trend.isIncrease ? 'text-green-500' : 'text-red-500'
-								)}
-							>
-								{trend.isIncrease ? '+' : ''}
-								{trend.value}%
-							</span>
-						</div>
-					)}
 				</div>
 			</CardContent>
 		</Card>
