@@ -43,42 +43,44 @@ export const MoodCard = ({ title, energy, valence, labels }: MoodCardProps) => {
 	const currentKey = getMoodKey();
 
 	return (
-		<Card className="flex flex-col justify-center">
+		<Card className="h-full">
 			<CardContent>
 				<p className="text-sm font-medium text-muted-foreground mb-4">
 					{title}
 				</p>
-				<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-					<div className="flex items-center gap-3">
-						<div className="text-3xl md:text-4xl animate-in zoom-in duration-300 select-none leading-none">
-							{MOOD_EMOJIS[currentKey]}
+				<div className="flex-1 flex flex-col justify-center">
+					<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+						<div className="flex items-center gap-3">
+							<div className="text-3xl md:text-4xl animate-in zoom-in duration-300 select-none leading-none">
+								{MOOD_EMOJIS[currentKey]}
+							</div>
+							<div>
+								<h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
+									{labels.moods[currentKey]}
+								</h3>
+							</div>
 						</div>
-						<div>
-							<h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
-								{labels.moods[currentKey]}
-							</h3>
-						</div>
+						{hasData && (
+							<div className="flex items-center gap-6 md:gap-10 opacity-90">
+								<div className="flex flex-col md:items-end">
+									<p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">
+										{labels.energy}
+									</p>
+									<p className="text-xl md:text-2xl font-bold tabular-nums">
+										{energyPct}%
+									</p>
+								</div>
+								<div className="flex flex-col md:items-end">
+									<p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">
+										{labels.positivity}
+									</p>
+									<p className="text-xl md:text-2xl font-bold tabular-nums">
+										{valencePct}%
+									</p>
+								</div>
+							</div>
+						)}
 					</div>
-					{hasData && (
-						<div className="flex items-center gap-6 md:gap-10 opacity-90">
-							<div className="flex flex-col md:items-end">
-								<p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">
-									{labels.energy}
-								</p>
-								<p className="text-xl md:text-2xl font-bold tabular-nums">
-									{energyPct}%
-								</p>
-							</div>
-							<div className="flex flex-col md:items-end">
-								<p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1">
-									{labels.positivity}
-								</p>
-								<p className="text-xl md:text-2xl font-bold tabular-nums">
-									{valencePct}%
-								</p>
-							</div>
-						</div>
-					)}
 				</div>
 			</CardContent>
 		</Card>
