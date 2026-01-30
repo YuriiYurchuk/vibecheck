@@ -152,7 +152,27 @@ declare const messages: {
 				"mostActiveDay": "Most Active Day",
 				"peakTime": "Peak Listening Time",
 				"plays": "{count, plural, one {# play} other {# plays}}",
-				"noData": "No data"
+				"noData": "No data",
+				"mood": {
+					"title": "Your Musical Mood",
+					"energy": "Energy",
+					"positivity": "Positivity",
+					"types": {
+						"energetic": "Energetic",
+						"chill": "Chill",
+						"intense": "Intense",
+						"melancholic": "Melancholic",
+						"balanced": "Balanced",
+						"noData": "Sleeping"
+					}
+				},
+				"streaks": {
+					"title": "Listening Streaks",
+					"longest": "Longest Streak",
+					"current": "Current Streak",
+					"days": "days in a row",
+					"keepItUp": "Keep it up!"
+				}
 			}
 		}
 	},
