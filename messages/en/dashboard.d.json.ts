@@ -174,6 +174,27 @@ declare const messages: {
 					"keepItUp": "Keep it up!"
 				}
 			}
+		},
+		"recent": {
+			"title": "Recent Plays",
+			"searchPlaceholder": "Search tracks, artists...",
+			"table": {
+				"number": "#",
+				"cover": "Cover",
+				"title": "Title",
+				"artist": "Artist",
+				"time": "Time",
+				"played": "Played"
+			},
+			"pagination": {
+				"info": "Showing <medium>{start}</medium>-<medium>{end}</medium> of <medium>{total}</medium>",
+				"previous": "Previous",
+				"next": "Next"
+			},
+			"empty": {
+				"title": "No tracks found",
+				"description": "Try adjusting your search."
+			}
 		}
 	},
 	"shared": {

@@ -171,6 +171,27 @@
 					"keepItUp": "Так тримати!"
 				}
 			}
+		},
+		"recent": {
+			"title": "Останні прослуховування",
+			"searchPlaceholder": "Пошук треків, виконавців...",
+			"table": {
+				"number": "#",
+				"cover": "Обкладинка",
+				"title": "Назва",
+				"artist": "Виконавець",
+				"time": "Тривалість",
+				"played": "Коли"
+			},
+			"pagination": {
+				"info": "Показано <medium>{start}</medium>-<medium>{end}</medium> з <medium>{total}</medium>",
+				"previous": "Назад",
+				"next": "Далі"
+			},
+			"empty": {
+				"title": "Треків не знайдено",
+				"description": "Спробуйте змінити пошуковий запит."
+			}
 		}
 	},
 	"shared": {
