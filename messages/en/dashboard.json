@@ -1,0 +1,233 @@
+{
+	"sidebar": {
+		"routes": {
+			"overview": "Overview",
+			"listeningHistory": "Listening History",
+			"moodAnalysis": "Mood Analysis",
+			"insights": "Insights",
+			"recentPlays": "Recent Plays",
+			"profile": "Profile"
+		},
+		"userMenu": {
+			"myAccount": "My Account",
+			"profile": "Profile",
+			"logout": "Logout"
+		},
+		"toggleMenu": "Toggle menu",
+		"backToHome": "Back to Home"
+	},
+	"pages": {
+		"overview": {
+			"greeting": {
+				"morning": "Good morning, {name}",
+				"afternoon": "Good afternoon, {name}",
+				"evening": "Good evening, {name}",
+				"default": "Welcome back, {name}"
+			},
+			"subtitle": "Here's what you've been listening to recently",
+			"stats": {
+				"totalHours": "Total Hours",
+				"totalPlays": "Total Plays",
+				"uniqueArtists": "Unique Artists",
+				"uniqueTracks": "Unique Tracks",
+				"hoursSuffix": "h"
+			},
+			"charts": {
+				"weeklyActivity": "Weekly Activity"
+			},
+			"mediaList": {
+				"topTracks": "Top Tracks",
+				"topArtists": "Top Artists",
+				"noTracks": "No tracks to display",
+				"noArtists": "No artists to display"
+			}
+		},
+		"listening": {
+			"title": "Your audio journey <highlight>{period}</highlight>",
+			"periodLastYear": "over the last year",
+			"periodYear": "in {year}",
+			"calendar": {
+				"tooltipTracks": "{count, plural, one {# track} other {# tracks}}",
+				"less": "Less",
+				"more": "More",
+				"total": "{{count}} activities in {{year}}",
+				"totalLastYear": "{{count}} activities over the last year"
+			},
+			"charts": {
+				"title": "Hourly Activity",
+				"description": "Activity distribution by time of day"
+			}
+		},
+		"mood": {
+			"title": "How your musical mood has evolved over time",
+			"stats": {
+				"avgTempo": "Avg Tempo",
+				"avgLoudness": "Avg Loudness",
+				"instrumental": "Instrumental",
+				"liveRecordings": "Live Recordings",
+				"bpmSuffix": "BPM",
+				"dbSuffix": "dB"
+			},
+			"tooltips": {
+				"avgTempo": "Average tempo in beats per minute. 120+ is energetic, 60-90 is chill.",
+				"avgLoudness": "Overall loudness. Closer to 0 dB is louder, closer to -60 dB is quieter.",
+				"instrumental": "Likelihood that the track contains no vocals.",
+				"liveRecordings": "Detects the presence of an audience in the recording."
+			},
+			"personality": {
+				"title": "Your Musical Vibe",
+				"noData": "No data to analyze yet",
+				"noDataHint": "Listen to some music to see your vibe!",
+				"highEnergy": "High-energy vibes",
+				"lowEnergy": "Chill & relaxed",
+				"mediumEnergy": "Balanced energy",
+				"positive": "Uplifting mood",
+				"melancholic": "Melancholic soul",
+				"balanced": "Emotionally balanced",
+				"majorLean": "Bright & major",
+				"minorLean": "Deep & minor"
+			},
+			"radar": {
+				"title": "Audio Features Profile",
+				"tooltipLabel": "Vibe Profile",
+				"energy": "Energy",
+				"dance": "Dance",
+				"valence": "Valence",
+				"acoustic": "Acoustic",
+				"speech": "Speech",
+				"live": "Live"
+			},
+			"modality": {
+				"title": "Major vs Minor",
+				"major": "Major",
+				"minor": "Minor",
+				"noData": "No Data"
+			},
+			"keys": {
+				"title": "Musical Keys"
+			},
+			"tempo": {
+				"title": "Musical Pulse",
+				"ranges": {
+					"slow": "Slow",
+					"moderate": "Moderate",
+					"fast": "Fast",
+					"veryFast": "Very Fast"
+				}
+			},
+			"scatter": {
+				"title": "Mood Quadrants",
+				"description": "Your music taste mapped by energy and mood.",
+				"axes": {
+					"sad": "Sad",
+					"happy": "Happy",
+					"calm": "Calm",
+					"intense": "Intense"
+				},
+				"legend": {
+					"happyIntense": "Happy / Intense",
+					"angryIntense": "Angry / Intense",
+					"happyCalm": "Happy / Calm",
+					"sadCalm": "Sad / Calm"
+				},
+				"tooltip": {
+					"valence": "Valence",
+					"energy": "Energy",
+					"plays": "{count, plural, =0 {No plays} one {# play} other {# plays}}"
+				}
+			},
+			"footer": "Statistics based on analysis of {count} out of {total} tracks ({percent}% coverage)"
+		},
+		"insights": {
+			"title": "Your Monthly Recap",
+			"subtitle": "A complete breakdown of your listening habits for this period",
+			"stats": {
+				"totalTime": "Total Listening Time",
+				"vsLastMonth": "vs last month",
+				"h": "h",
+				"m": "m",
+				"mostActiveDay": "Most Active Day",
+				"peakTime": "Peak Listening Time",
+				"plays": "{count, plural, one {# play} other {# plays}}",
+				"noData": "No data",
+				"mood": {
+					"title": "Your Musical Mood",
+					"energy": "Energy",
+					"positivity": "Positivity",
+					"types": {
+						"energetic": "Energetic",
+						"chill": "Chill",
+						"intense": "Intense",
+						"melancholic": "Melancholic",
+						"balanced": "Balanced",
+						"noData": "Sleeping"
+					}
+				},
+				"streaks": {
+					"title": "Listening Streaks",
+					"longest": "Longest Streak",
+					"current": "Current Streak",
+					"days": "days in a row",
+					"keepItUp": "Keep it up!"
+				}
+			}
+		},
+		"recent": {
+			"title": "Recent Plays",
+			"searchPlaceholder": "Search tracks, artists...",
+			"table": {
+				"number": "#",
+				"cover": "Cover",
+				"title": "Title",
+				"artist": "Artist",
+				"time": "Time",
+				"played": "Played"
+			},
+			"pagination": {
+				"info": "Showing <medium>{start}</medium>-<medium>{end}</medium> of <medium>{total}</medium>",
+				"previous": "Previous",
+				"next": "Next"
+			},
+			"empty": {
+				"title": "No tracks found",
+				"description": "Try adjusting your search."
+			}
+		}
+	},
+	"shared": {
+		"filters": {
+			"day": "Day",
+			"week": "Week",
+			"month": "Month",
+			"lastYear": "Last year",
+			"top": "Top {count}",
+			"modes": {
+				"rolling": "Rolling",
+				"calendar": "Calendar",
+				"tooltips": {
+					"rolling": "Data for the selected period (last 24h, 7 days, or 30 days).",
+					"calendar": "Data strictly from the 1st of the current month until today."
+				}
+			},
+			"thisMonth": "This Month",
+			"currentMonth": "Current month",
+			"monthsAgo": "{count, plural, one {# month ago} other {# months ago}}"
+		},
+		"days": {
+			"monday": "Monday",
+			"tuesday": "Tuesday",
+			"wednesday": "Wednesday",
+			"thursday": "Thursday",
+			"friday": "Friday",
+			"saturday": "Saturday",
+			"sunday": "Sunday"
+		}
+	},
+	"apiErrors": {
+		"defaultTitle": "Something went wrong",
+		"defaultMessage": "An unknown error occurred.",
+		"unauthorized": "Your session has expired. Please refresh the page or log in again.",
+		"serverError": "Failed to fetch dashboard data. Please try again later.",
+		"retryButton": "Try Again"
+	}
+}

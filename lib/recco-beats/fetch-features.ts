@@ -1,4 +1,4 @@
-import { chunkArray, delay } from '@/lib/helpers';
+import { chunkArray, delay } from '@/lib/utils';
 import type { AudioFeatures, FeaturesResponse } from '@/types/recco-beats';
 import { RECCO_BEATS_API_BASE } from './constants';
 

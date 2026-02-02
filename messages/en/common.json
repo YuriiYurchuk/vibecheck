@@ -1,0 +1,14 @@
+{
+	"header": {
+		"changeLanguage": "Change language",
+		"toggleTheme": "Toggle theme",
+		"theme": { "light": "Light", "dark": "Dark", "system": "System" },
+		"languages": { "english": "English", "ukrainian": "Українська" }
+	},
+	"time": {
+		"now": "just now",
+		"minutesAgo": "{count}m",
+		"hoursAgo": "{count}h",
+		"daysAgo": "{count}d"
+	}
+}

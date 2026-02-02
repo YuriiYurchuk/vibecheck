@@ -39,15 +39,15 @@ export type DashboardListeningResponse = {
 
 export type DashboardMoodResponse = {
 	averageFeatures: {
-		acousticness: number | null;
-		danceability: number | null;
-		energy: number | null;
-		instrumentalness: number | null;
-		liveness: number | null;
-		loudness: number | null;
-		speechiness: number | null;
-		tempo: number | null;
-		valence: number | null;
+		avgAcousticness: number | null;
+		avgDanceability: number | null;
+		avgEnergy: number | null;
+		avgInstrumentalness: number | null;
+		avgLiveness: number | null;
+		avgLoudness: number | null;
+		avgSpeechiness: number | null;
+		avgTempo: number | null;
+		avgValence: number | null;
 		tracksWithFeatures: number;
 		totalTracks: number;
 	};
@@ -123,3 +123,7 @@ export type DashboardInsightsResponse = {
 		isIncrease: boolean;
 	};
 };
+
+export type Period = 'day' | 'week' | 'month';
+export type Limit = 10 | 25;
+export type Mode = 'rolling' | 'calendar';

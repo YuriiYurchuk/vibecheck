@@ -1,0 +1,14 @@
+{
+	"header": {
+		"changeLanguage": "Змінити мову",
+		"toggleTheme": "Змінити тему",
+		"theme": { "light": "Світла", "dark": "Темна", "system": "Системна" },
+		"languages": { "english": "English", "ukrainian": "Українська" }
+	},
+	"time": {
+		"now": "щойно",
+		"minutesAgo": "{count} хв",
+		"hoursAgo": "{count} год",
+		"daysAgo": "{count} дн"
+	}
+}
