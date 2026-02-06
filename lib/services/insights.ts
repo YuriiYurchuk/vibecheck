@@ -107,7 +107,7 @@ export const getPeakListeningHour = async (
 	`;
 
 	if (!result[0]) {
-		return { hour: 12, range: '12:00-13:00', count: 0 };
+		return { hour: 12, range: 'No Data', count: 0 };
 	}
 
 	const hour = result[0].hour;
@@ -139,8 +139,8 @@ export const getMusicalMood = async (
 			AND t.valence IS NOT NULL
 	`;
 
-	const energy = result[0]?.avg_energy ?? 0.5;
-	const valence = result[0]?.avg_valence ?? 0.5;
+	const energy = result[0]?.avg_energy ?? 0;
+	const valence = result[0]?.avg_valence ?? 0;
 
 	return {
 		energy,

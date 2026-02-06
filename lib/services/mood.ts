@@ -42,15 +42,15 @@ export const getAverageAudioFeatures = async (
 	const row = result[0];
 
 	return {
-		acousticness: row?.avg_acousticness ?? null,
-		danceability: row?.avg_danceability ?? null,
-		energy: row?.avg_energy ?? null,
-		instrumentalness: row?.avg_instrumentalness ?? null,
-		liveness: row?.avg_liveness ?? null,
-		loudness: row?.avg_loudness ?? null,
-		speechiness: row?.avg_speechiness ?? null,
-		tempo: row?.avg_tempo ?? null,
-		valence: row?.avg_valence ?? null,
+		avgAcousticness: row?.avg_acousticness ?? null,
+		avgDanceability: row?.avg_danceability ?? null,
+		avgEnergy: row?.avg_energy ?? null,
+		avgInstrumentalness: row?.avg_instrumentalness ?? null,
+		avgLiveness: row?.avg_liveness ?? null,
+		avgLoudness: row?.avg_loudness ?? null,
+		avgSpeechiness: row?.avg_speechiness ?? null,
+		avgTempo: row?.avg_tempo ?? null,
+		avgValence: row?.avg_valence ?? null,
 		tracksWithFeatures: Number(row?.tracks_with_features || 0),
 		totalTracks: Number(row?.total_tracks || 0),
 	};
