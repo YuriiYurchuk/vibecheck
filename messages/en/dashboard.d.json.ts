@@ -195,6 +195,23 @@ declare const messages: {
 				"title": "No tracks found",
 				"description": "Try adjusting your search."
 			}
+		},
+		"profile": {
+			"info": {
+				"title": "Information",
+				"registered": "Registration Date",
+				"timezone": "Timezone",
+				"email": "Email"
+			},
+			"dangerZone": {
+				"title": "Delete Account",
+				"description": "You will permanently lose access to your profile, listening history, and settings. This action cannot be undone.",
+				"button": "Delete Account",
+				"modalTitle": "Are you absolutely sure?",
+				"modalDescription": "This will permanently delete your profile <bold>{name}</bold>.",
+				"cancel": "Cancel",
+				"confirm": "Yes, delete"
+			}
 		}
 	},
 	"shared": {
