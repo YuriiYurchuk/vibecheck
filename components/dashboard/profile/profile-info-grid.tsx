@@ -1,6 +1,7 @@
 import { Calendar, Globe, Mail, User } from 'lucide-react';
-import { useTranslations } from 'next-intl'; // 1. Імпорт
+import { useTranslations } from 'next-intl';
 import { Card, CardContent } from '@/components/ui/card';
+import { FadeIn } from '@/components/ui/fade-in';
 import { Label } from '@/components/ui/label';
 import { useDateFormatter } from '@/hooks/use-date-formatter';
 import { cn } from '@/lib/utils';
@@ -31,29 +32,36 @@ export const ProfileInfoGrid = ({
 
 	return (
 		<div className="grid gap-6">
-			<h3 className="text-lg font-semibold flex items-center gap-2">
-				<User className="size-5 text-primary" />
-				{tInfo('title')}
-			</h3>
-
+			<FadeIn delay={100}>
+				<h3 className="text-lg font-semibold flex items-center gap-2">
+					<User className="size-5 text-primary" />
+					{tInfo('title')}
+				</h3>
+			</FadeIn>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-				<InfoCard
-					label={tInfo('registered')}
-					icon={<Calendar className="size-5" />}
-					value={createdAt ? formatDate(createdAt, 'd MMMM yyyy') : null}
-					capitalize
-				/>
-				<InfoCard
-					label={tInfo('timezone')}
-					icon={<Globe className="size-5" />}
-					value={displayTimezone}
-				/>
-				<InfoCard
-					label={tInfo('email')}
-					icon={<Mail className="size-5" />}
-					value={email}
-					truncate
-				/>
+				<FadeIn delay={200}>
+					<InfoCard
+						label={tInfo('registered')}
+						icon={<Calendar className="size-5" />}
+						value={createdAt ? formatDate(createdAt, 'd MMMM yyyy') : null}
+						capitalize
+					/>
+				</FadeIn>
+				<FadeIn delay={300}>
+					<InfoCard
+						label={tInfo('timezone')}
+						icon={<Globe className="size-5" />}
+						value={displayTimezone}
+					/>
+				</FadeIn>
+				<FadeIn delay={400}>
+					<InfoCard
+						label={tInfo('email')}
+						icon={<Mail className="size-5" />}
+						value={email}
+						truncate
+					/>
+				</FadeIn>
 			</div>
 		</div>
 	);

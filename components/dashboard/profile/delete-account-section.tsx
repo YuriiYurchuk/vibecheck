@@ -1,5 +1,6 @@
 import { Loader2, ShieldAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl'; // 1. Імпорт
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import {
 	AlertDialog,
@@ -25,6 +26,7 @@ export const DeleteAccountSection = ({
 	const tDanger = useTranslations('dashboard.pages.profile.dangerZone');
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const router = useRouter();
 
 	const handleDeleteAccount = async () => {
 		setIsDeleting(true);
@@ -34,6 +36,8 @@ export const DeleteAccountSection = ({
 
 			setIsDialogOpen(false);
 			await signOut();
+			router.push('/');
+			router.refresh();
 		} catch (error) {
 			console.error(error);
 			setIsDeleting(false);
