@@ -247,7 +247,10 @@ export function AppSidebar() {
 											asChild
 											className="cursor-pointer focus:bg-sidebar-accent focus:text-sidebar-accent-foreground"
 										>
-											<Link href="/profile" className="cursor-pointer">
+											<Link
+												href="/dashboard/profile"
+												className="cursor-pointer"
+											>
 												<User className="mr-2 h-4 w-4" />
 												{tSidebar('userMenu.profile')}
 											</Link>

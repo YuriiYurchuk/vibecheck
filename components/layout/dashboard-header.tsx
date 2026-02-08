@@ -32,7 +32,7 @@ const routeKeys: Record<string, SidebarRouteKeys> = {
 	'/dashboard/mood': 'moodAnalysis',
 	'/dashboard/insights': 'insights',
 	'/dashboard/recent': 'recentPlays',
-	'/profile': 'profile',
+	'/dashboard/profile': 'profile',
 };
 
 export const DashboardHeader = () => {
