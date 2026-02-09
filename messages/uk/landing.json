@@ -3,5 +3,32 @@
 		"loading": "Завантаження...",
 		"goToDashboard": "Перейти до панелі",
 		"connectSpotify": "Підключити Spotify"
+	},
+	"hero": {
+		"badge": "VibeCheck 1.0 вже тут",
+		"title": {
+			"start": "Твій Spotify,",
+			"highlight": "розкладений",
+			"end": "на атоми"
+		},
+		"description": "Більше ніж просто топи. Аналізуй тональність, BPM, енергійність та танцювальність. Відкрий свій музичний календар та справжні звички прослуховування.",
+		"secondaryButton": "Код на GitHub",
+		"demoButton": "Дивитись демо",
+		"waitlist": {
+			"triggerButton": "Долучитись до Beta",
+			"title": "Отримати ранній доступ",
+			"description": "Spotify вимагає ручного додавання в білий список. Залиште свій email, і я додам вас якнайшвидше.",
+			"successTitle": "Запит надіслано!",
+			"successMessage": "Я отримав ваш email. Перевіряйте скриньку, запрошення скоро буде.",
+			"closeButton": "Закрити",
+			"errorMessage": "Помилка відправки. Спробуйте ще раз.",
+			"submitButton": "Надіслати запит",
+			"form": {
+				"nameLabel": "Ім'я",
+				"namePlaceholder": "Ваше Ім'я",
+				"emailLabel": "Email твого Spotify акаунту",
+				"emailPlaceholder": "you@gmail.com"
+			}
+		}
 	}
 }

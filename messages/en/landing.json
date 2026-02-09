@@ -3,5 +3,32 @@
 		"loading": "Loading...",
 		"goToDashboard": "Go to Dashboard",
 		"connectSpotify": "Connect Spotify"
+	},
+	"hero": {
+		"badge": "VibeCheck 1.0 is here",
+		"title": {
+			"start": "Your Spotify,",
+			"highlight": "deconstructed",
+			"end": "to the core"
+		},
+		"description": "Beyond top tracks. Analyze keys, BPM, energy, and danceability. Discover your music calendar and true listening habits.",
+		"secondaryButton": "View on GitHub",
+		"demoButton": "Live Demo",
+		"waitlist": {
+			"triggerButton": "Join Beta",
+			"title": "Get Early Access",
+			"description": "Spotify requires manual whitelisting. Drop your email, and I'll add you ASAP.",
+			"successTitle": "Request Sent!",
+			"successMessage": "I've received your email. Check your inbox soon for the invite.",
+			"closeButton": "Close",
+			"errorMessage": "Failed to send. Please try again.",
+			"submitButton": "Send Request",
+			"form": {
+				"nameLabel": "Name",
+				"namePlaceholder": "Your Name",
+				"emailLabel": "Your Spotify Account Email",
+				"emailPlaceholder": "you@gmail.com"
+			}
+		}
 	}
 }
