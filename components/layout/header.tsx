@@ -17,7 +17,7 @@ export const LandingHeader = () => {
 				>
 					<Logo className="size-6 text-primary dark:text-white" />
 					<span className="truncate font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary to-accent hidden sm:inline-block">
-						Vibecheck
+						VibeCheck
 					</span>
 				</Link>
 				<nav className="flex items-center gap-1 md:gap-2">

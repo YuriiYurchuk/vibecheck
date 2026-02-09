@@ -3,15 +3,17 @@
 import { ArrowRight, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import * as React from 'react';
+import { forwardRef, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { signIn, useSession } from '@/lib/auth/client';
+import { cn } from '@/lib/utils';
 
 type AuthButtonProps = {
 	variant?: 'default' | 'ghost' | 'outline';
 	size?: 'default' | 'sm' | 'lg';
 	showAvatar?: boolean;
+	className?: string;
 };
 
 const SpotifyIcon = () => (
@@ -24,11 +26,14 @@ const SpotifyIcon = () => (
 	</svg>
 );
 
-export const AuthButton = React.forwardRef<HTMLButtonElement, AuthButtonProps>(
-	({ variant = 'default', size = 'default', showAvatar = true }, ref) => {
+export const AuthButton = forwardRef<HTMLButtonElement, AuthButtonProps>(
+	(
+		{ variant = 'default', size = 'default', showAvatar = true, className },
+		ref
+	) => {
 		const t = useTranslations('landing.header');
 		const { data: session, isPending } = useSession();
-		const [isSigningIn, setIsSigningIn] = React.useState(false);
+		const [isSigningIn, setIsSigningIn] = useState(false);
 
 		const handleSignIn = async () => {
 			setIsSigningIn(true);
@@ -50,7 +55,7 @@ export const AuthButton = React.forwardRef<HTMLButtonElement, AuthButtonProps>(
 					disabled
 					variant={variant}
 					size={size}
-					className="gap-2"
+					className={cn('gap-2', className)}
 				>
 					<Loader2 className="size-4 animate-spin text-muted-foreground" />
 					<span>{t('loading')}</span>
@@ -62,9 +67,9 @@ export const AuthButton = React.forwardRef<HTMLButtonElement, AuthButtonProps>(
 			return (
 				<Button
 					asChild
-					variant={variant === 'ghost' ? 'ghost' : 'outline'}
+					variant={variant === 'ghost' ? 'ghost' : 'default'}
 					size={size}
-					className="gap-2"
+					className={cn('gap-2', className)}
 				>
 					<Link href="/dashboard">
 						{showAvatar && (
@@ -93,7 +98,7 @@ export const AuthButton = React.forwardRef<HTMLButtonElement, AuthButtonProps>(
 				onClick={handleSignIn}
 				variant={variant}
 				size={size}
-				className="font-semibold"
+				className={cn('font-semibold', className)}
 			>
 				<SpotifyIcon />
 				{t('connectSpotify')}
