@@ -30,5 +30,44 @@
 				"emailPlaceholder": "you@gmail.com"
 			}
 		}
+	},
+	"features": {
+		"title": "Your Musical DNA",
+		"subtitle": "Visualize your taste. VibeCheck breaks down your library into atoms.",
+		"analytics": {
+			"title": "Top Stats",
+			"desc": "Analysis of your most played tracks and artists. Discover who really shapes your music taste."
+		},
+		"audio": {
+			"title": "Audio Metrics",
+			"desc": "Analysis of BPM, energy, and danceability. See your music from a technical perspective."
+		},
+		"mood": {
+			"title": "Vibe Meter",
+			"desc": "Detecting the overall mood of your library: from calm melancholy to energetic drive."
+		},
+		"history": {
+			"title": "Listening History",
+			"desc": "We automatically save your listening history to the database for future analysis."
+		}
+	},
+	"howItWorks": {
+		"title": "How It Works",
+		"subtitle": "Simple process. No complex setup required.",
+		"step1": {
+			"title": "Connect Spotify",
+			"desc": "Log in via your official Spotify account. It's secure and takes 10 seconds."
+		},
+		"step2": {
+			"title": "We Analyze",
+			"desc": "Our algorithm scans your history, audio features, and builds your profile."
+		},
+		"step3": {
+			"title": "Discover Your Vibe",
+			"desc": "Get detailed stats and learn something new about your taste."
+		}
+	},
+	"footer": {
+		"copyright": "© {year} VibeCheck. Розроблено <name>Yurii Yurchuk</name>."
 	}
 }
