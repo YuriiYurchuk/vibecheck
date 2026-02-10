@@ -59,8 +59,8 @@
 			"desc": "Log in via your official Spotify account. It's secure and takes 10 seconds."
 		},
 		"step2": {
-			"title": "We Analyze",
-			"desc": "Our algorithm scans your history, audio features, and builds your profile."
+			"title": "Analyze",
+			"desc": "Algorithm scans your history, audio features, and builds your profile."
 		},
 		"step3": {
 			"title": "Discover Your Vibe",

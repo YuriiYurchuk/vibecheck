@@ -1,6 +1,6 @@
 import { Activity, BarChart3, History, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // 👇 Імпортуємо картки
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FadeIn } from '@/components/ui/fade-in';
 
 export const LandingFeatures = () => {
