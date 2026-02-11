@@ -1,45 +1,19 @@
-'use client';
+import { LandingFeatures } from '@/components/landing/features';
+import { LandingHero } from '@/components/landing/hero';
+import { LandingHowItWorks } from '@/components/landing/how-it-works';
+import { LandingFooter } from '@/components/layout/footer';
+import { LandingHeader } from '@/components/layout/header';
 
-import Image from 'next/image';
-import { signIn, signOut, useSession } from '@/lib/auth/client';
-
-export default function Home() {
-	const { data: session } = useSession();
-
+export default function LandingPage() {
 	return (
-		<div>
-			<main>
-				<h1>Welcome to VibeCheck</h1>
-
-				{!session ? (
-					<button
-						type="button"
-						className="py-3 px-4 bg-green-700 rounded-2xl text-white"
-						onClick={() => signIn.social({ provider: 'spotify' })}
-					>
-						Sign In
-					</button>
-				) : (
-					<div className="flex flex-col gap-4">
-						<p>Signed in as {session.user.email}</p>
-						<Image
-							src={session.user.image || ''}
-							alt="User Avatar"
-							width={100}
-							height={100}
-							className="rounded-full"
-						/>
-						<p>{session.user.name}</p>
-						<button
-							type="button"
-							className="py-3 px-4 bg-red-700 rounded-2xl text-white"
-							onClick={() => signOut()}
-						>
-							Log Out
-						</button>
-					</div>
-				)}
+		<div className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden">
+			<LandingHeader />
+			<main className="flex-1">
+				<LandingHero />
+				<LandingFeatures />
+				<LandingHowItWorks />
 			</main>
+			<LandingFooter />
 		</div>
 	);
 }
