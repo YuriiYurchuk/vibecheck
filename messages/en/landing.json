@@ -68,6 +68,6 @@
 		}
 	},
 	"footer": {
-		"copyright": "© {year} VibeCheck. Розроблено <name>Yurii Yurchuk</name>."
+		"copyright": "© {year} VibeCheck. Built by <name>Yurii Yurchuk</name>."
 	}
 }
