@@ -24,6 +24,11 @@ const routeGradients: Record<string, string> = {
 	'/dashboard/insights': 'from-chart-5 to-chart-4',
 	'/dashboard/recent': 'from-chart-4 to-chart-3',
 	'/profile': 'from-accent to-primary',
+	'/demo': 'from-chart-3 to-chart-2',
+	'/demo/listening': 'from-chart-2 to-chart-1',
+	'/demo/mood': 'from-chart-1 to-chart-5',
+	'/demo/insights': 'from-chart-5 to-chart-4',
+	'/demo/recent': 'from-chart-4 to-chart-3',
 };
 
 const routeKeys: Record<string, SidebarRouteKeys> = {
@@ -33,6 +38,11 @@ const routeKeys: Record<string, SidebarRouteKeys> = {
 	'/dashboard/insights': 'insights',
 	'/dashboard/recent': 'recentPlays',
 	'/dashboard/profile': 'profile',
+	'/demo': 'overview',
+	'/demo/listening': 'listeningHistory',
+	'/demo/mood': 'moodAnalysis',
+	'/demo/insights': 'insights',
+	'/demo/recent': 'recentPlays',
 };
 
 export const DashboardHeader = () => {

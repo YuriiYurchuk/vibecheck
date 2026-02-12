@@ -11,7 +11,8 @@
 		"userMenu": {
 			"myAccount": "Мій акаунт",
 			"profile": "Профіль",
-			"logout": "Вийти"
+			"logout": "Вийти",
+			"exitDemo": "Вийти з Демо"
 		},
 		"toggleMenu": "Меню",
 		"backToHome": "Повернутися на головну"

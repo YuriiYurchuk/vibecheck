@@ -44,14 +44,24 @@ import { Link } from '@/i18n/navigation';
 import { signOut, useSession } from '@/lib/auth/client';
 import { cn } from '@/lib/utils';
 
-export function AppSidebar() {
+export function AppSidebar({
+	demoUser,
+	basePath = '/dashboard',
+}: {
+	demoUser?: { name: string; email: string; image?: string };
+	basePath?: string;
+}) {
 	const tSidebar = useTranslations('dashboard.sidebar');
 	const pathname = usePathname();
 	const locale = useLocale();
 	const { data: session, isPending } = useSession();
 	const { state, isMobile, setOpenMobile } = useSidebar();
 
-	const currentPath = pathname.replace(`/${locale}`, '') || '/';
+	const normalizedPathname = pathname.startsWith(`/${locale}`)
+		? pathname.replace(`/${locale}`, '') || '/'
+		: pathname;
+
+	const user = demoUser || session?.user;
 
 	const getUserInitials = (name?: string) => {
 		if (!name) return 'U';
@@ -64,6 +74,10 @@ export function AppSidebar() {
 	};
 
 	const handleLogout = async () => {
+		if (demoUser) {
+			window.location.href = '/';
+			return;
+		}
 		await signOut();
 		window.location.href = '/';
 	};
@@ -71,31 +85,31 @@ export function AppSidebar() {
 	const items = [
 		{
 			title: tSidebar('routes.overview'),
-			url: '/dashboard',
+			url: basePath === '/dashboard' ? '/dashboard' : basePath,
 			icon: LayoutDashboard,
 			color: 'text-chart-3',
 		},
 		{
 			title: tSidebar('routes.listeningHistory'),
-			url: '/dashboard/listening',
+			url: `${basePath}/listening`,
 			icon: Activity,
 			color: 'text-chart-2',
 		},
 		{
 			title: tSidebar('routes.moodAnalysis'),
-			url: '/dashboard/mood',
+			url: `${basePath}/mood`,
 			icon: HeartPulse,
 			color: 'text-chart-1',
 		},
 		{
 			title: tSidebar('routes.insights'),
-			url: '/dashboard/insights',
+			url: `${basePath}/insights`,
 			icon: Lightbulb,
 			color: 'text-chart-5',
 		},
 		{
 			title: tSidebar('routes.recentPlays'),
-			url: '/dashboard/recent',
+			url: `${basePath}/recent`,
 			icon: Music2,
 			color: 'text-chart-4',
 		},
@@ -109,7 +123,7 @@ export function AppSidebar() {
 						<SidebarMenuItem>
 							<SidebarMenuButton size="lg" asChild>
 								<Link
-									href="/dashboard"
+									href={basePath}
 									onClick={() => isMobile && setOpenMobile(false)}
 								>
 									<div className="flex aspect-square size-8 items-center justify-center rounded-lg">
@@ -143,9 +157,9 @@ export function AppSidebar() {
 						<SidebarMenu>
 							{items.map((item) => {
 								const isActive =
-									item.url === '/dashboard'
-										? currentPath === '/dashboard'
-										: currentPath.startsWith(item.url);
+									normalizedPathname === item.url ||
+									(normalizedPathname.startsWith(`${item.url}/`) &&
+										item.url !== basePath);
 								return (
 									<SidebarMenuItem key={item.title}>
 										<SidebarMenuButton
@@ -165,9 +179,6 @@ export function AppSidebar() {
 														'h-5 w-5 shrink-0 transition-transform group-hover:scale-110',
 														isActive ? item.color : 'opacity-70'
 													)}
-													style={{
-														color: isActive ? item.color : undefined,
-													}}
 												/>
 												<span>{item.title}</span>
 											</Link>
@@ -189,7 +200,7 @@ export function AppSidebar() {
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
-					{isPending ? (
+					{isPending && !demoUser ? (
 						<SidebarMenuItem>
 							<SidebarMenuButton size="lg" className="pointer-events-none">
 								<Skeleton className="h-8 w-8 rounded-lg" />
@@ -204,7 +215,7 @@ export function AppSidebar() {
 								)}
 							</SidebarMenuButton>
 						</SidebarMenuItem>
-					) : session?.user ? (
+					) : user ? (
 						<FadeIn delay={200}>
 							<SidebarMenuItem>
 								<DropdownMenu>
@@ -215,20 +226,18 @@ export function AppSidebar() {
 										>
 											<Avatar className="h-8 w-8 rounded-lg">
 												<AvatarImage
-													src={session.user.image || ''}
-													alt={session.user.name || ''}
+													src={user.image || ''}
+													alt={user.name || ''}
 												/>
 												<AvatarFallback className="rounded-lg bg-linear-to-r from-primary to-accent text-white">
-													{getUserInitials(session.user.name)}
+													{getUserInitials(user.name)}
 												</AvatarFallback>
 											</Avatar>
 											<div className="grid flex-1 text-left text-sm leading-tight">
 												<span className="truncate font-semibold">
-													{session.user.name}
+													{user.name}
 												</span>
-												<span className="truncate text-xs">
-													{session.user.email}
-												</span>
+												<span className="truncate text-xs">{user.email}</span>
 											</div>
 											<ChevronUp className="ml-auto size-4" />
 										</SidebarMenuButton>
@@ -239,28 +248,35 @@ export function AppSidebar() {
 										align="end"
 										sideOffset={4}
 									>
-										<DropdownMenuLabel>
-											{tSidebar('userMenu.myAccount')}
-										</DropdownMenuLabel>
-										<DropdownMenuSeparator />
-										<DropdownMenuItem
-											asChild
-											className="cursor-pointer focus:bg-sidebar-accent focus:text-sidebar-accent-foreground"
-										>
-											<Link
-												href="/dashboard/profile"
-												className="cursor-pointer"
-											>
-												<User className="mr-2 h-4 w-4" />
-												{tSidebar('userMenu.profile')}
-											</Link>
-										</DropdownMenuItem>
+										{!demoUser && (
+											<>
+												<DropdownMenuLabel>
+													{tSidebar('userMenu.myAccount')}
+												</DropdownMenuLabel>
+												<DropdownMenuSeparator />
+												<DropdownMenuItem asChild>
+													<Link
+														href="/dashboard/profile"
+														className={cn(
+															'flex w-full items-center cursor-pointer gap-2',
+															normalizedPathname === '/dashboard/profile' &&
+																'bg-sidebar-accent text-sidebar-accent-foreground'
+														)}
+													>
+														<User className="size-4 opacity-70" />{' '}
+														<span>{tSidebar('userMenu.profile')}</span>
+													</Link>
+												</DropdownMenuItem>
+											</>
+										)}
 										<DropdownMenuItem
 											onClick={handleLogout}
 											className="cursor-pointer text-destructive focus:text-destructive focus:bg-sidebar-accent"
 										>
 											<LogOut className="mr-2 h-4 w-4" />
-											{tSidebar('userMenu.logout')}
+											{demoUser
+												? tSidebar('userMenu.exitDemo')
+												: tSidebar('userMenu.logout')}
 										</DropdownMenuItem>
 									</DropdownMenuContent>
 								</DropdownMenu>
