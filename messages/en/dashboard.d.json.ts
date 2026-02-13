@@ -14,7 +14,8 @@ declare const messages: {
 		"userMenu": {
 			"myAccount": "My Account",
 			"profile": "Profile",
-			"logout": "Logout"
+			"logout": "Logout",
+			"exitDemo": "Exit Demo"
 		},
 		"toggleMenu": "Toggle menu",
 		"backToHome": "Back to Home"
