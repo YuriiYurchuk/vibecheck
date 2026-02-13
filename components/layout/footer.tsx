@@ -34,7 +34,7 @@ export const LandingFooter = () => {
 				</div>
 				<div className="flex items-center gap-6">
 					<a
-						href="https://github.com/yurchuk-yurii/vibecheck"
+						href="https://github.com/YuriiYurchuk/vibecheck"
 						target="_blank"
 						rel="noreferrer"
 						className="text-muted-foreground hover:text-foreground transition-colors"

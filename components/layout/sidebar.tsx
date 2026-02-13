@@ -131,7 +131,7 @@ export function AppSidebar({
 									</div>
 									<div className="grid flex-1 text-left text-sm leading-tight">
 										<span className="truncate font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary to-accent">
-											Vibecheck
+											VibeCheck
 										</span>
 									</div>
 								</Link>

@@ -26,7 +26,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 
 export const LandingHero = () => {
 	const tHero = useTranslations('landing.hero');
-	const GITHUB_REPO_URL = 'https://github.com/yurchuk-yurii/vibecheck';
+	const GITHUB_REPO_URL = 'https://github.com/YuriiYurchuk/vibecheck';
 
 	const hideLogin = process.env.NEXT_PUBLIC_HIDE_LOGIN === 'true';
 
