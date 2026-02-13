@@ -5,31 +5,15 @@
 		"connectSpotify": "Connect Spotify"
 	},
 	"hero": {
-		"badge": "VibeCheck 1.0 is here",
+		"badge": "VibeCheck 1.0 (Open Source)",
 		"title": {
 			"start": "Your Spotify,",
 			"highlight": "deconstructed",
 			"end": "to the core"
 		},
-		"description": "Beyond top tracks. Analyze keys, BPM, energy, and danceability. Discover your music calendar and true listening habits.",
-		"secondaryButton": "View on GitHub",
+		"description": "Due to new Spotify API policies, public access is temporarily restricted. You can explore the full functionality in Demo Mode, or deploy your own app with your API keys in 5 minutes.",
 		"demoButton": "Live Demo",
-		"waitlist": {
-			"triggerButton": "Join Beta",
-			"title": "Get Early Access",
-			"description": "Spotify requires manual whitelisting. Drop your email, and I'll add you ASAP.",
-			"successTitle": "Request Sent!",
-			"successMessage": "I've received your email. Check your inbox soon for the invite.",
-			"closeButton": "Close",
-			"errorMessage": "Failed to send. Please try again.",
-			"submitButton": "Send Request",
-			"form": {
-				"nameLabel": "Name",
-				"namePlaceholder": "Your Name",
-				"emailLabel": "Your Spotify Account Email",
-				"emailPlaceholder": "you@gmail.com"
-			}
-		}
+		"githubButton": "View Source Code"
 	},
 	"features": {
 		"title": "Your Musical DNA",
@@ -52,19 +36,19 @@
 		}
 	},
 	"howItWorks": {
-		"title": "How It Works",
-		"subtitle": "Simple process. No complex setup required.",
+		"title": "Under the Hood",
+		"subtitle": "How VibeCheck processes data",
 		"step1": {
-			"title": "Connect Spotify",
-			"desc": "Log in via your official Spotify account. It's secure and takes 10 seconds."
+			"title": "Spotify API",
+			"desc": "Secure OAuth 2.0 authentication to securely fetch user listening history and saved tracks."
 		},
 		"step2": {
-			"title": "Analyze",
-			"desc": "Algorithm scans your history, audio features, and builds your profile."
+			"title": "Data Analysis",
+			"desc": "The algorithm scans hundreds of tracks, calculating audio features (BPM, energy, valence)."
 		},
 		"step3": {
-			"title": "Discover Your Vibe",
-			"desc": "Get detailed stats and learn something new about your taste."
+			"title": "Visual Dashboards",
+			"desc": "Raw data is transformed into clean, interactive charts using Recharts and Tailwind CSS."
 		}
 	},
 	"footer": {
