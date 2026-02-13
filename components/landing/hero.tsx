@@ -1,13 +1,15 @@
-import { LayoutDashboard, Zap } from 'lucide-react';
+import { Github, LayoutDashboard, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { AuthButton } from '@/components/landing/auth-button';
-import { WaitlistDialog } from '@/components/landing/waitlist-dialog';
 import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/ui/fade-in';
 
 export const LandingHero = () => {
 	const t = useTranslations('landing.hero');
+	const GITHUB_REPO_URL = 'https://github.com/yurchuk-yurii/vibecheck';
+
+	const hideLogin = process.env.NEXT_PUBLIC_HIDE_LOGIN === 'true';
 
 	return (
 		<section className="relative pt-20 pb-24 sm:pt-28 sm:pb-32 md:pt-36 md:pb-40 lg:pt-40 lg:pb-48 overflow-hidden">
@@ -23,10 +25,10 @@ export const LandingHero = () => {
 					<FadeIn delay={200} className="w-full">
 						<h1 className="max-w-[90%] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto font-extrabold tracking-tight text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 sm:mb-8 leading-[1.1] sm:leading-[1.1] drop-shadow-[0_0_25px_rgba(168,85,247,0.2)]">
 							<span className="block sm:hidden">
-								{t('title.start')}{' '}
+								{t('title.start')}
 								<span className="bg-linear-to-r from-primary via-primary/70 to-chart-3 bg-clip-text text-transparent inline-block">
 									{t('title.highlight')}
-								</span>{' '}
+								</span>
 								{t('title.end')}
 							</span>
 							<span className="hidden sm:block">
@@ -44,23 +46,35 @@ export const LandingHero = () => {
 						</p>
 					</FadeIn>
 					<FadeIn delay={400} className="w-full px-4 sm:px-0">
-						<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-							<AuthButton
+						<div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 justify-center max-w-md sm:max-w-3xl mx-auto">
+							{!hideLogin && (
+								<AuthButton
+									size="lg"
+									variant="default"
+									className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-full shadow-md transition-all hover:scale-105 active:scale-95 sm:min-w-40"
+								/>
+							)}
+							<Button
+								asChild
+								variant={hideLogin ? 'default' : 'secondary'}
 								size="lg"
-								variant="default"
 								className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-full shadow-md transition-all hover:scale-105 active:scale-95 sm:min-w-40"
-							/>
-							<WaitlistDialog />
+							>
+								<Link href="/demo">
+									<LayoutDashboard className="mr-2 size-4 shrink-0" />
+									{t('demoButton')}
+								</Link>
+							</Button>
 							<Button
 								asChild
 								variant="outline"
 								size="lg"
 								className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-medium rounded-full gap-2 border-border/50 bg-background/50 backdrop-blur-sm hover:bg-accent/10 hover:text-accent-foreground transition-all sm:min-w-40"
 							>
-								<Link href="/demo">
-									<LayoutDashboard className="size-4 shrink-0" />
-									<span className="whitespace-nowrap">{t('demoButton')}</span>
-								</Link>
+								<a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+									<Github className="size-4 shrink-0" />
+									<span className="whitespace-nowrap">{t('githubButton')}</span>
+								</a>
 							</Button>
 						</div>
 					</FadeIn>
