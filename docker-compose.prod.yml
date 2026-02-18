@@ -9,8 +9,6 @@ services:
       POSTGRES_DB: vibecheck
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
     networks:
       - vibecheck_network
     healthcheck:
@@ -24,8 +22,6 @@ services:
     image: yuriiy/vibecheck:latest
     container_name: vibecheck_app
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/vibecheck"
       SPOTIFY_CLIENT_ID: "${SPOTIFY_CLIENT_ID}"
@@ -40,9 +36,24 @@ services:
     networks:
       - vibecheck_network
 
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    command: caddy reverse-proxy --from https://${SERVER_IP}.nip.io --to app:3000
+    networks:
+      - vibecheck_network
+
 networks:
   vibecheck_network:
     name: vibecheck_network
 
 volumes:
   postgres_data:
+  caddy_data:
+  caddy_config:
